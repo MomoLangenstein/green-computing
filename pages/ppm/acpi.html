@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Power Management &middot; Green Computing</title>
+    <style>article > figure { width: 90%; }</style>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a class="active">Power Management</a>
+                <ul style="list-style-type: none">
+                    <li><a class="active">Introduction to ACPI</a></li>
+                    <li><a href="pages/ppm/power.html">Power to the OS</a></li>
+                    <li><a href="pages/ppm/threads.html">Balancing threads</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/nac/index.html">Networking</a>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+        <header>
+            <h1>Platform Power Management</h1>
+            <span>Power subsystems in a modern Personal Computer</span>
+        </header>
+        <p>
+            At the very lowest level, it is the hardware which consumes power, in order to perform the computations requested of it by the software on which it runs. Yet, it is the software which best knows its own execution characteristics, and which, if implemented
+            well, gives a power manager incredible potential to save energy. In this article, we will be discussing the industry standard in hardware-software power management — the Advanced Configuration and Power Interface.
+        </p>
+        <h2>ACPI</h2>
+        <p>
+            The Advanced Configuration and Power Interface (ACPI) is an open standard, proposed by Intel, Microsoft and Toshiba, and first released in December 1996. It aimed to supplant the previous power management architecture, Advanced Power Management, which
+            had been incumbent since at least early in 1990 in <abbr title="Internation Business Machines">IBM</abbr> PC-compatibles.
+        </p>
+        <figure>
+            <img src="pages/ppm/apm.svg" alt="Layers of APM">
+            <figcaption>Fig. 1: Layers in the architecture of legacy APM</figcaption>
+        </figure>
+        <p>
+            APM provided a rather coarse and somewhat low-level means by which power consumption of the system could be adapted. It was implemented primarily in the <abbr title="Basic Input Output System">BIOS</abbr>, with software-level control dependent
+            upon an APM driver in the operating system, and an application aware of APM, with calls to change power state made through BIOS interrupts.
+        </p>
+        <p>By virtue of operating at a very low level, power management was independent of the currently installed OS, and would work no matter the configuration of the system, but this led to trade-offs in accuracy and effectiveness as power management code
+            running in the BIOS had very little awareness of what was happening in the system. The limited number of APM-aware applications meant that crude power management through observation of memory and disk accesses, CPU activity, and interrupts
+            meant it was difficult to balance power savings with spurious transitions to idle states — such as during a presentation, when the computer is still in use, but sees no activity.
+        </p>
+        <h2>Designing a modern interface</h2>
+        <p>
+            Clearly, co-operative power management, where primarily the operating system issues commands, which are despatched and accepted by platform firmware to transition between power states, would offer finer-grained control, and hence efficacy, was required.
+        </p>
+        <figure>
+            <img src="pages/ppm/acpi-architecture.svg" alt="Layers of ACPI">
+            <figcaption>Fig. 2: Layers in the architecture of ACPI</figcaption>
+        </figure>
+        <p>
+            The new design crucially affords application software to drive power management functionality, by exposing a powerful and flexible interface to the operating system, which is not dependent on the programming of the firmware by the manufacturer. Hence,
+            a uniform, consistent, and upgradeable management machinery is realised.
+        </p>
+        <p>To understand and explore how the operating system in conjunction with application software can make use of this interface, it is necessary to briefly detail the specification of ACPI.
+        </p>
+        <h2>OSPM</h2>
+        <p>
+            The OSPM paradigm, Operating System-directed Configuration and Power Management, is enabled by ACPI-compatible firmware and OS. In order to effect power management commands, the concept of <em>power states</em>, <em>processor states</em>,
+            and <em>performance states</em> are exposed to the ACPI stack. In the interests of scope, this article will examine only the effects of the last two.
+        </p>
+        <h3>Processor states</h3>
+        <p>The following states govern the overall status of the CPU. Power consumption is in descending order.</p>
+        <ol>
+            <li>C0: normal operation</li>
+            <li>C1: halted, can resume execution immediately</li>
+            <li>C2: clock stopped, can resume quickly</li>
+            <li>C3: sleeping, takes longer to resume</li>
+        </ol>
+        <h3>Performance states</h3>
+        <p>The following states govern the performance characteristics of the CPU whilst in processor state C0. The CPU control circuitry will gate clocks and reduce voltage increasingly aggressively at higher states through dynamic voltage scaling. Power
+            consumption is in descending order.
+        </p>
+        <ol>
+            <li>P0: maximum performance</li>
+            <li>P1: reduced clocks and voltages</li>
+            <li>P2: reduced clocks and voltages</li>
+            <li>Pn: reduced clocks and voltages</li>
+        </ol>
+        <p>With this abstraction, and depending on the capabilities of the hardware, the operating system power management subsystem will be able to dynamically place the processor into low power states as necessary, and when required. Furthermore, it can
+            intelligently optimise its execution to keep the processor in one of these states for as long as possible. These techniques will form the basis of this subtopic. Read on!
+        </p>
+        <footer>
+            <hr>
+            <h4>Citations</h4>
+            <cite>(1) Jim Kardach. Advances in ultrabook™ platform power management. <i>Proceedings of the 2012 ACM/IEEE international symposium on Low power electronics and design (ISLPED '12).</i> 2012: 65-66. Available from: <a href="https://doi.org/doi:10.1145/2333660.2333678">doi:10.1145/2333660.2333678</a></cite>
+            <cite>(2) Y. H. Lu, T. Simunic and G. De Micheli. Software controlled power management. <i>Proceedings of the Seventh International Workshop on Hardware/Software Codesign, 1999. (CODES '99).</i> 1999: 157-161. Available from: <a href="https://doi.org/doi:10.1109/HSC.1999.777412">doi:10.1109/HSC.1999.777412</a></cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

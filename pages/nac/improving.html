@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Improving Network Protocols &middot; Networking &middot; Green Computing</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a class="active">Networking</a>
+                <ul style="list-style-type: none;">
+                    <li>
+                        <a href="pages/nac/index.html">Introduction</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/reducing.html">Demand Reduction</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/caching.html">Caching</a>
+                    </li>
+                    <li>
+                        <a class="active" href="pages/nac/improving.html">Improving Network Protocols</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+
+        <header>
+            <h1 style="margin-bottom: 0px">Improving Network Protocols</h1>
+            <span style="font-size: 1.3em; color: grey">Investigating the effect of improved network protcols and software on energy usage of mobile devices.</span>
+        </header>
+
+        <p>
+            Standard network protocols like <a href="https://en.wikipedia.org/wiki/HTTP">HTTP</a> (which makes up more than 80% of total traffic to mobile devices) and <a href="https://en.wikipedia.org/wiki/TLS">TLS</a> (which is increasing in usage due to privacy and security concerns) provide an easy and well supported method of communication for the web and app developers. These protcols have been around for many years and efficient and well understood implementations exist on all platforms. However, their age means that they were designed in the age of mainframes, before mobile devices had been conceived. As a consequence, overheads inherent in their designs have become significant on mobile devcices. TLS requires several round trips to establish a connection, increasing the time taken to set it up, and requiring a large amount of energy. Meanwhile, TCP, another protocol at a lower layer of the network stack, which HTTP and TLS run on, also has features that make it unsuitable for mobile network connections. Replacing these older protcols with newer ones more suited to mobile devices could reduce energy consumption.
+        </p>
+
+        <p>
+            The various power states of mobile network hardware also affects energy consumption. Large amounts of energy are consumed by the hardware when not actively transmitting or receiving, but instead simply waiting to transmit or receive. Reducing the time spent in these waiting states is an important step to reducing overall energy consumption of networking hardware. Rescheduling network requests to maximise the length of idle time between transmissions can also help to reduce the total time spent in these waiting states.
+        </p>
+
+        <figure>
+            <img src="pages/nac/power-states.png">
+            <figcaption>Fig 1: Power states of mobile networking hardware, in general <a class="citation" href="pages/nac/improving.html#cite-1">(1)</a>.</figcaption>
+        </figure>
+
+        <h2>Improving Request Scheduling</h2>
+
+        <p>
+            If packets, instead of being sent slowly over time, can be scheduled so that they are sent in bursts followed by periods of idle time, then the network hardware has to spend less time in higher power states and can consume less energy overall. Existing algorithms to achieve this, for example 802.11b (WiFi)'s Power Saving Mode, have significant implications to throughput and latency of connections <a class="citation" href="pages/nac/improving.html#cite-2">(2)</a>. These older systems are therefore not suitable for modern mobile devices as users demand higher throughput and lower latency.
+        </p>
+
+        <figure>
+            <img src="pages/nac/protocol-bursting.png">
+            <figcaption>Fig 2: Bursts can save energy by increasing sleep time <a class="citation" href="pages/nac/improving.html#cite-2">(2)</a>.</figcaption>
+        </figure>
+
+        <p>
+            New algorithms for scheduling packets can improve over these existing ones. One proposal suggests that in the best case 50% of energy is saved for only a 7% increase in time taken, and in the average case the reduction in energy is significantly greater than the wall time slowdown <a class="citation" href="pages/nac/improving.html#cite-2">(2)</a>.
+        </p>
+
+        <h2>Lower Overhead Protocols</h2>
+
+        <p>
+            HTTP 2, which was standardised in 2015, is a replacement for the aging HTTP protocol, and its energy performance on mobile devices is improved over its predecessor. For example, where HTTP 1.1 (the previous version, standardised in 1995) only allows one request per connection; HTTP 2 allows multiple requests to occur in parallel on one connection. This avoids the overhead of opening multiple connections and decreases the total time spent transmitting. In HTTP 1.1, when loading a web page, the client must download the resource and parse it, before extracting links to further resources required for rendering the page. In HTTP 2, the server can predict the resources the client will require, and automatically send them in parallel with the main page. This saves several round trips in typical web browsing scenarios and therefore improves both speed and energy consumption. These improvements are particularly important when the device has a connection with a high round-trip-time, as is typical with WiFi and cellular connections in areas with poor signal. In these conditions, HTTP2 saves significant energy as compared to HTTP 1.1, and in fast network conditions the energy consumed is no higher <a href="pages/nac/improving.html#cite-3">(3)</a> <a href="pages/nac/improving.html#cite-4">(4)</a>.
+        </p>
+
+        <p>
+            QUIC is another protocol developed by Google, similarly to HTTP 2, with ambitions to improve web browsing speed. QUIC replaces TCP with UDP and aims to reduce latency by removing round trips and improved multiplexing and streaming. QUIC prevents a single lost packet from holding up a whole connection as in multiplexed TCP, and instead  a lost packet only interrupts a single stream within that connection. These improvements decrease the time taken in higher energy states, thus reducing the energy consumed <a class="citation" href="pages/nac/improving.html#cite-5">(5)</a> <a class="citation" href="pages/nac/improving.html#cite-6">(6)</a> <a class="citation" href="pages/nac/improving.html#cite-7">(7)</a> <a class="citation" href="pages/nac/improving.html#cite-8">(8)</a>.
+        </p>
+
+        <figure>
+            <img src="pages/nac/quic-rtt.png">
+            <figcaption>Fig 3: QUIC connections have less overhead as round-trips are reduced <a class="citation" href="pages/nac/improving.html#cite-7">(7)</a>.</figcaption>
+        </figure>
+
+        <p>
+            Although HTTP 2 and QUIC have significant advantages in several areas for mobile devices, adoption is still lacking in many websites and apps. A W3Techs rurvey shows that just over 25% of top sites used HTTP 2 in February 2018; QUIC adoption is estimated at only 5%. Thus increasing the adoption of these new protocols can help to reduce energy usage.
+        </p>
+
+        <footer>
+            <hr>
+            <h4>References</h4>
+            <cite id="cite-1">(1) Qian F. Toward Mobile-Friendly Web Browsing. <i>IEEE Internet Computing.</i> [Online] Institute of Electrical and Electronics Engineers (IEEE); 2015;19(5): 72–76. Available from: <a href="https://doi.org/doi:10.1109/mic.2015.98">doi:10.1109/mic.2015.98</a></cite>
+
+            <cite id="cite-2">(2) Haijin Yan, Watterson SA, Lowenthal DK, Kang Li, Krishnan R, Peterson LL. Client-Centered, Energy-Efficient Wireless Communication on IEEE 802.11b Networks. <i>IEEE Transactions on Mobile Computing.</i> [Online] Institute of Electrical and Electronics Engineers (IEEE); 2006;5(11): 1575–1590. Available from: <a href="https://doi.org/doi:10.1109/tmc.2006.159">doi:10.1109/tmc.2006.159</a> </cite>
+
+            <cite id="cite-3">(3) W<sup>3</sup>Techs. Usage of HTTP/2 for websites. Available from: <a href="https://w3techs.com/technologies/details/ce-http2/all/all">https://w3techs.com/technologies/details/ce-http2/all/all</a>. [Accessed 10th March 2018]</cite>
+
+            <cite id="cite-4">(4) Chowdhury SA, Sapra V, Hindle A. <i>Is HTTP/2 more energy efficient than HTTP/1.1 for mobile users?.</i> [Online] PeerJ; 2015. Available from: <a href="https://doi.org/doi:10.7287/peerj.preprints.1280v1">doi:10.7287/peerj.preprints.1280v1</a></cite>
+
+            <cite id="cite-5">(5) Langley A, Iyengar J, Bailey J, Dorfman J, Roskind J, Kulik J, et al. <i>The QUIC Transport Protocol.</i> Proceedings of the Conference of the ACM Special Interest Group on Data Communication - SIGCOMM ’17. [Online] ACM Press; 2017. Available from: <a href="https://doi.org/doi:10.1145/3098822.3098842">doi:10.1145/3098822.3098842</a></cite>
+
+            <cite id="cite-6">(6) Huang Cheng, Lv Yongbo. Web Optimization of QUIC under Wireless Network. AMSE JOURNALS-AMSE IIETA publication-2017-Series: Advances B; Vol. 60; N°1; pp161-173. Available from: <a href="http://www.iieta.org/sites/default/files/Journals/AMA/AMA_B/60.01_10.pdf">http://www.iieta.org/sites/default/files/Journals/AMA/AMA_B/60.01_10.pdf</a></cite>
+
+            <cite id="cite-7">(7) Megyesi P, Kramer Z, Molnar S. <i>How quick is QUIC?</i> 2016 IEEE International Conference on Communications (ICC). [Online] IEEE; 2016. Available from: <a href="https://doi.org/doi:10.1109/icc.2016.7510788">doi:10.1109/icc.2016.7510788</a></cite>
+
+            <cite id="cite-8">(8) Murray D, Koziniec T, Zander S, Dixon M, Koutsakis P. An Analysis of Changing Enterprise Network Traffic Characteristics. Available from: <a href="http://profiles.murdoch.edu.au/myprofile/david-murray/files/2012/06/An_Analysis_of_Changing_Enterprise_Network_Traffic_Characteristics-22.pdf">http://profiles.murdoch.edu.au/myprofile/david-murray/files/2012/06/An_Analysis_of_Changing_Enterprise_Network_Traffic_Characteristics-22.pdf</a>. [Accessed 10th March 2018]</cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

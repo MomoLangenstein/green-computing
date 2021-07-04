@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Energy Consumption &middot; Theory &middot; Green Computing</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a class="active">Theory</a>
+                <ul style="list-style-type: none">
+                    <li>
+                        <a class="active">Energy Consumption</a>
+                    </li>
+                    <li>
+                        <a href="pages/theory/low-level.html">Low-level Theory</a>
+                    </li>
+                    <li>
+                        <a href="pages/theory/reversible-computations.html">Reversible computations</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a href="pages/nac/index.html">Networking</a>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+            <header>
+                    <h1 style="margin-bottom: 0px">Energy Consumption</h1>
+                    <span style="font-size: 1.3em; color: grey">Why and how desktop and mobile devices consume power</span>
+                </header>
+        <h2>Conventional PC</h2>
+        <p>
+            To save energy, it is essential to know how computers use it. Each computer consists of multiple different components, and the primary energy consumers of a computer are the LCD (display) and the CPU. CPU stands for
+            Central Processing Unit although it is usually called the Processor, for short. The CPU is the core chip of the computer, which executes all
+            programs.</p>
+        <p> The main power consuming component of the display is the backlight, which is, effectively, a lamp shining through all the pixels to make
+            them visible. Its main job is lighting, so the electrical energy of the power supply is converted into useful light. We cannot do much to save the energy there, apart from reducing the brightness, as human eyes do not work without light.
+        </p>
+        <p>
+            But what happens inside the processor? If its main job is to compute, can we say that power is transformed into computations? Of
+            course, this is not the case. Computations are not a form of energy. The energy is lost to electrical resistance and leakage in the silicon components. Electrical
+            energy is transformed into thermal energy, or simply heat. More specifically, most of the energy dissipation
+            can be described using the following formula
+            <a class="citation" href="pages/theory/consumption.html#cite-1">(1)</a>:
+        </p>
+        <p>P &#61; n &#215; a &#215; C &#215; V<sup>2</sup> &#215; f</p>
+        <ul>
+            <li>n &mdash; the number of transistors in a processor</li>
+            <li>a &mdash; activity </li>
+            <li>C &mdash; capacitance</li>
+            <li>V &mdash; voltage</li>
+            <li>f &mdash; frequency</li>
+        </ul>
+        <p>
+            As we can see, increasing the operating frequency, activity or adding more transistors to a processor make it consume more energy. At the same time, it allows for a greater number of computations to be done at the same time. Moreover, we want our processors to be fast. Capacitance is a property of each transistor. Decreasing voltage would
+            benefit the sustainability, but it would decrease the reliability of the processor, as the difference between
+            small and big voltage signals (0 and 1) would be small enough for small mistakes to occur.
+        </p>
+        <h2 class="pinline">
+            <span>Note</span>
+        </h2>
+        <p class="note">
+            There are other components, such as coolers, peripheral devices, and optical drives; and many of them consume significant amounts of energy as well. However, unlike the CPU, these are not essential for the operation of the computer
+            system and they are rarely used (compared to CPU and the memory, which are used 100% of the time. Therefore,
+            these are out of the scope of our research).
+        </p>
+        <hr>
+        <h2>
+            Mobile devices
+        </h2>
+        <p>
+            Smartphones and tablets are similar to desktop computers, as they also have processor, memory, and screen. However, unlike
+            desktop computers tablets and smartphones make use of devices such as accelerometer and gyroscope (which are
+            used for spatial recognition of the device); they are not connected to the network with cables, so they make
+            extensive use of Wi-Fi and cellular technologies. Various other sensors, like cameras, Bluetooth and GPS are
+            also responsible for short battery life of our phones.
+
+        </p>
+        <h2>
+            Experimental measurements
+        </h2>
+        <p>
+            Measuring the energy is much more straightforward on Android devices because of Apple's closed policies. It can be done using free tools such as PowerTutor (for Android, an app developed by PhD students from University of Michigan). In the diagram below, one of the results of a recent (2016) smartphone energy consumption study. The researchers tested several
+            major components of a typical Android smartphone (Galaxy Note 3), as well as it normal operating in normal and
+aeroplane modes are shown.
+        </p>
+        <!-- Images should have a border with explanation and a reference -->
+        <figure>
+            <img src="pages/theory/theory/note3-power-consumption.png">
+            <figcaption>Fig. 1: Power consumption of a Galaxy Note 3 phone <a class="citation" href="pages/theory/consumption.html#cite-3">(3)</a></figcaption>
+        </figure>
+        <p>
+            As we can see, the three most energy-hungry components are networking devices and OLED (the screen). Obviously, if we want to reduce the power consumption of a smartphone, networking should be our main target. Also, putting a phone
+            into aeroplane mode (which effectively disables all its networking capabilities) is the best way to make your
+            battery live longer.
+        </p>
+        <p>
+            CPUs are far less important for mobile devices. To understand why we need to know, how the mobile devices are (typically)
+            used. Measuring the exact time spent on various activities would be quite tricky, as users tend to use their phones repeatedly for short periods of time. What people would miss if they did not have the phone
+        </p>
+        <figure  style = "width: calc(100% - 2em);">
+            <img src="pages/theory/theory/phone-usage.png">
+            <figcaption>Fig. 2: Activity smartphone users say they would most miss using their phone for, by age <a class="citation" href="pages/theory/consumption.html#cite-4">(4)</a></figcaption>
+        </figure>
+        <p>
+            We can conclude that people are not doing many processing-heavy tasks on their mobile devices, such as video editing, 3D
+            modelling or games with realistic graphics. Although there are applications of this kind for tablets and smartphones,
+            they are mainly used for texting, using social media, surfing the net, sending emails. Therefore, performance requirements of smartphones are typically lower than of desktop computers. Moreover, again, as networking is the main usage of mobile devices, its sustainability is crucial.
+        </p>
+        <p> At the same time, sustainability requirement is much higher; as users not only want their devices to live longer
+            from one battery charge but also they want the phones to be small and thin, which limits the size of the battery that can be used. These are the reasons why CPUs in the phones tend to age slower and consume less energy.
+        </p>
+        <h2>Conclusion</h2>
+        <p>
+            So, how can we consume less energy? We cannot do much to the screens, so our main targets are the processor and the networking components. You can read about optimising both on
+            <a href="pages/ppm/acpi.html">CPU Power Management</a> and
+            <a href="pages/nac/index.html">Networking</a> sections of our website. Both of these are important, but desktop computers will mainly be affected by processor optimisations, while mobile devices would benefit from sustainable networking.
+        </p>
+        <p>
+            Last but not least: no matter how efficient is the hardware, developers may neglect the benefits by writing inefficient programs.
+            Software in general needs to be optimised to maximise power efficiency. The
+            <a href="pages/dev/index.html">Software</a> section on our website explains, how software developers ensure energy efficiency of their products.
+            If you are a developer yourself, you can have a look at our
+            <a href="pages/development-tips.html">Tips for writing energy efficient software</a>.
+        </p>
+        <footer>
+            <hr>
+            <h4>References</h4>
+            <cite id="cite-1" class="reference">(1) Taylor IoT Kidd.<i>Why P scales as C*V^2*f is so obvious</i>. 2009. Available from: <a href="https://software.intel.com/en-us/blogs/2009/06/29/why-p-scales-as-cv2f-is-so-obvious">https://software.intel.com/en-us/blogs/2009/06/29/why-p-scales-as-cv2f-is-so-obvious</a> [Accessed 5th March 2018]</cite>
+            <cite id="cite-2" class="reference">(2) Sparsh Mittal. A Survey of Techniques For Improving Energy Effciency in Embedded Computing Systems.<i>ACM Computing Surveys.</i> 2014. 46(4): Available from: <a href="https://www.academia.edu/4186102/A_survey_of_techniques_for_improving_energy_efficiency_in_embedded_computing_systems">https://www.academia.edu/4186102/A_survey_of_techniques_for_improving_energy_efficiency_in_embedded_computing_systems</a> [Accessed 5th March 2018]</cite>
+            <cite id="cite-3" class="reference">(3) Mohammad Tawalbeha, Alan Eardleya, Lo’ai Tawalbehb. Studying the Energy Consumption in Mobile Devices.<i>Procedia Computer Science.</i> 2016. 94(1): 183&ndash;189. Available from: <a href="https://www.sciencedirect.com/science/article/pii/S1877050916317756">https://www.sciencedirect.com/science/article/pii/S1877050916317756</a> [Accessed 5th March 2018]</cite>
+            <cite id="cite-4" class="reference">(4) <i>Adults' media use and attitudes</i>. Ofcom. 2017. Available from: <a href="https://www.ofcom.org.uk/__data/assets/pdf_file/0020/102755/adults-media-use-attitudes-2017.pdf">https://www.ofcom.org.uk/__data/assets/pdf_file/0020/102755/adults-media-use-attitudes-2017.pdf</a> [Accessed 5th March 2018]</cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+
+</body>
+
+</html>

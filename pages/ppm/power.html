@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Power &middot; Power Management &middot; Green Computing</title>
+    <style>article > figure { width: 90%; }</style>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a class="active">Power Management</a>
+                <ul style="list-style-type: none">
+                    <li><a href="pages/ppm/acpi.html">Introduction to ACPI</a></li>
+                    <li><a class="active">Power to the OS</a></li>
+                    <li><a href="pages/ppm/threads.html">Balancing threads</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/nac/index.html">Networking</a>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+        <header>
+            <h1>The Synergy in OSPM</h1>
+            <span>Or how the whole is greater than the sum of its parts</span>
+        </header>
+        <p>
+            In the previous article in this series, we examined how a modern interface was designed to enable new leaps in the software regulation of hardware. We looked at the history leading to the conception of ACPI, and its overarching design principles and components, including the central concept of <em>states</em> hardware could be in. This article will go a little farther into the components of this architecture and introduce an interesting trade-off between performance and power.
+        </p>
+        <h2>The Power Manager</h2>
+        <p>
+            Recall Fig. 2 from the first article, which is reproduced here for your convenience:
+        </p>
+        <figure>
+            <img src="pages/ppm/acpi-architecture.svg" alt="Layers of ACPI">
+            <figcaption>Fig. 2: Layers in the architecture of ACPI</figcaption>
+        </figure>
+        <p>
+            This graphic aims to relate the key components in an ACPI-compliant system, showing what they are and how they link together. While it is not in the scope of this series to discuss in depth the specific implementation details of each of these blocks,
+            it is of relevance to examine the functional block marked "Power Management". What does it do?
+        </p>
+        <figure>
+            <img src="pages/ppm/power-manager.svg" alt="Role of a power manager">
+            <figcaption>Fig. 3: The role of the power manager component</figcaption>
+        </figure>
+        <p>
+            The operating system's power manager (or governor, depending on the OS) has numerous responsibilities. Amongst them, it:</p>
+        <ol>
+            <li>Communicates with the ACPI driver to effect transitions between different ACPI states</li>
+            <li>Remains aware of the capabilities in terms of power management of available execution units (cores)</li>
+            <li>Communicates status and information to other parts of the OS kernel…</li>
+            <li>…and assists in applying the currently active power policy.</li>
+        </ol>
+        <p>
+            Examples of power managers are found in all modern operating systems. In Linux, different <em>governors</em> are available, with the recommended <code>ondemand</code> governor dynamically scaling CPU frequency in response to load.
+        </p>
+        <p>
+            In Windows, the kernel power manager handles platform power consumption through <em>power schemes</em>, which are applied dynamically dependent on the current task. For example, launching applications might require a low latency scheme, media playback could allow a low power scheme, and on mobile PCs such as phones and tablets, when the battery is nearing depletion, an aggressive low power scheme might be required to conserve battery life.
+        </p>
+        <p>In light of these facts then, perhaps a somewhat obvious implementation for a power manager comes to mind — namely, if one wished to optimise power consumption, simply set the processor to the maximum performance state when busy, and the minimum
+            when idle.
+        </p>
+        <p>Alas, as always, it is not that simple. What would be the challenges that such a design might face?</p>
+        <h2>Caveat emptor</h2>
+        <p>
+            Again, recall the abridged list of states presented in the previous article, reproduced here for your convenience:
+        </p>
+        <h3>Processor states</h3>
+        <ol>
+            <li>C0: normal operation</li>
+            <li>C1: halted, can resume execution immediately</li>
+            <li>C2: clock stopped, can resume quickly</li>
+            <li>C3: sleeping, takes longer to resume</li>
+        </ol>
+
+        <h3>Performance states</h3>
+        <ol>
+            <li>P0: maximum performance</li>
+            <li>P1: reduced clocks and voltages</li>
+            <li>P2: reduced clocks and voltages</li>
+            <li>Pn: reduced clocks and voltages</li>
+        </ol>
+        <p>
+            For the sake of the following illustration, we refer to another class of states defined in the ACPI specification, the <strong>Global States</strong>. The essence of global states is that they represent the externally visible behaviour of the platform — that is, what the user sees.
+        </p>
+        <p>The states are defined from G0 to G3, where the former is the normal working state, and the latter is a full shutdown with power disconnected. States G1, sleeping, is further subdivided into various sleep states. Once again, deeper, higher numbered
+            states represent greater power savings, but in the case of global states, even more so than processor or performance states, which themselves offer in comparison more fine-grained but more incremental changes.</p>
+        <p>With this information, it is now possible to answer the question posed at the end of the last section. Why is it not a good design for a power manager to, in general, place the system completely into sleep, or even, into shutdown, during all idle
+            periods? Although perhaps no power would be consumed if the system transitioned into G3, the key is that the power consumed by the hardware in effecting the transition itself, both to and from a state, as well as the time latency associated
+            with such a change, may turn out to be prohibitively expensive if not managed well!</p>
+        <p>Herein lies the rub — it is not sufficient for a naive power manager to blindly transition to low power states whenever the system is not being used because the time which the system remains idle is neither constant nor trivial to predict. In fact,
+            an inefficient algorithm may impact power usage more than one which leaves the system at full speed all the time, not least because the user may become frustrated with delays and latencies, and switch power management off entirely.</p>
+        <figure>
+            <img src="pages/ppm/transition-latency.png" alt="Time and energy costs during state changes">
+            <figcaption>Fig. 4: Time and energy costs during state changes <a class="citation" href="pages/ppm/power.html#cite-costs">(2)</a></figcaption>
+        </figure>
+        <p>The best algorithms will consider and influence many factors to avoid spurious transitioning, and one of them is to intelligently manage the cause of power consumption on the processor in the first place — execution. Next up in this series: threads,
+            and their scheduling thereof. Don’t miss it!</p>
+        <footer>
+            <hr>
+            <h4>Citations</h4>
+            <cite>(1) Unified Extensible Firmware Interface Forum. <i>Advanced Configuration and Power Interface Specification, Version 6.2 Errata A.</i> Oregon: UEFI; 2017.</cite>
+            <cite id="cite-costs">(2) Y. H. Lu, T. Simunic and G. De Micheli. Software controlled power management. <i>Proceedings of the Seventh International Workshop on Hardware/Software Codesign, 1999. (CODES '99).</i> 1999: 157-161. Available from: <a href="https://doi.org/doi:10.1109/HSC.1999.777412">doi:10.1109/HSC.1999.777412</a></cite>
+            <cite>(3) Xavier, M. G., Rossi, F. D., De Rose, C. A. F., Calheiros, R. N., and Gomes, D. G. Modeling and simulation of global and sleep states in ACPI-compliant energy-efficient cloud environments. <i>Concurrency and Computatation: Practice and Experience.</i> 2017;29(4): e3839. Available from <a href="https://doi.org/doi:10.1002/cpe.3839">doi:10.1002/cpe.3839</a></cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

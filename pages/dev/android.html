@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <base href="../../">
+        <link rel="stylesheet" type="text/css" href="menuStyle.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <title>Android&trade; Platform &middot; Software Development &middot; Green Computing</title>
+    </head>
+
+    <body>
+        <nav>
+            <ul class="sidenav">
+                <li>
+                    <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+                </li>
+                <hr style="border-style: solid; color: var(--main)">
+                <li>
+                    <a href="index.html#menu">Home</a>
+                </li>
+                <li>
+                    <a href="pages/theory/consumption.html">Theory</a>
+                </li>
+                <li>
+                    <a class="active">Software Development</a>
+                    <ul style="list-style-type: none">
+                        <li>
+                            <a href="pages/dev/index.html">Introduction</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/analysis.html">Energy Estimates</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/languages.html#article">Language Efficiency</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/languages.html#tool">Language Comparison Tool</a>
+                        </li>
+                        <li>
+                            <a class="active">Android&trade; Architecture</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="pages/ppm/acpi.html">Power Management</a>
+                </li>
+                <li>
+                    <a href="pages/nac/index.html">Networking</a>
+                </li>
+                <li>
+                    <a href="pages/development-tips.html">Practical Tips</a>
+                </li>
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+            <i></i>
+        </div>
+
+        <article>
+            <header>
+                <h1 style="margin-bottom: 0px">Execution Model of the Android&trade; Architecture</h1>
+            </header>
+
+            <a href="pages/dev/android.html#cite-1">
+                <img src="pages/dev/android/android.svg" style="float: right; height: 10em; margin: 1em; margin-bottom: 0; width:unset">
+            </a>
+
+            <p>
+                Android is an open-source operating system, which is developed mainly by Google and other companies from the Open Handset Alliance like Sony, Samsung, LG and Nvidia. It was first released on the HTC Dream in 2008 and has become the dominant mobile operating system since then <a class="citation" href="pages/dev/android.html#cite-2">(2)</a>. Java is its main programming language, in which both the operating system and the applications are written. It is run in a different virtual machine for the bytecode execution than the standard Sun JVM, which has developed from a very optimised and basic version <a class="citation" href="pages/dev/android.html#cite-3">(3: p. 22)</a> to include several specific performance increasing technologies like JIT and AOT compilation today. The entire platform architecture is built around memory and execution speed constraints as well as the primary goal of energy efficiency to increase the time between charging.
+            </p>
+
+            <h2>Android platform architecture</h2>
+
+            <p>
+                Android is based on a modified version of the Linux kernel, which has custom implementations for most libraries to increase the efficiency on a device with a small amount of memory and a slow processor <a class="citation" href="pages/dev/android.html#cite-3">(p. 18)</a>. It can be described as a software stack which is built up of several layers of abstraction, which for example hide the individual camera driver in the Linux kernel from the applications through the hardware abstraction layer. The top, there are the programs which communicate with the system managers, other applications or libraries through the Java API <a class="citation" href="pages/dev/android.html#cite-4">(4)</a>. Since the release of the Android <b>N</b>ative <b>D</b>evelopment <b>K</b>it, performance critical code can also be written in C and C++ and native libraries in those languages included in the program. At the bottom of the stack is the power management system, which tries to reduce the consumption through optimised resource and thread management, power states as well as automatic low power modes for applications.
+            </p>
+
+            <h2>Types of compilation</h2>
+
+            <p>Java is a language that runs in a virtual machine to increase the portability of code, which means that upon the initial compilation, the source code is only transformed into an intermediate bytecode format. As this format has to be translated into the platform-specific machine code instructions at runtime, virtual machines are slower and consume more energy than compiled languages in general. This execution model can be improved by introducing compilation at different points:</p>
+
+            <p>
+                <b>J</b>ust-<b>I</b>n-<b>T</b>ime compilation tries to identify the most used code paths at runtime and compile them to native code. While this method needs an additional overhead in processing time and memory to track the control flow, it still increases the performance. However, most of such code on Android already is executed in compiled native libraries, which reduces the speedup that can be achieved in applications <a class="citation" href="pages/dev/android.html#cite-3">(3: p. 22)</a>.
+            </p>
+
+            <p>
+                <b>A</b>head-<b>O</b>f-<b>T</b>ime compilation is closer to traditional compiled languages and combines a lot of the goals of the motivations behind both execution models. The bytecode is compiled into native platform-specific machine code before its execution, ideally not at runtime. Android incorporates this method with its new runtime and performs most of the compilation at installation time. Therefore, the source code written for Dalvik is still portable to all Android systems, while the manufacturers of the hardware can specifically optimise their version of the compiler.
+            </p>
+
+            <h2>Android's Dalvik</h2>
+
+            <p>
+                Dalvik was the name of Android's first virtual machine but was discontinued with Android 5.0 Lollipop in 2014. Still, Dalvik shows the specific challenges faced by developers for mobile platforms. The Dalvik Virtual Machine runs a special byte-code which is optimised to be more space efficient through a smaller instruction set with 16 bits per instruction and a more compressed file structure <a class="citation" href="pages/dev/android.html#cite-3">(p. 19)</a>. Initially, Dalvik was only an interpreter of the bytecode without any JIT compilation. It is implemented such that the multiple separated instances of it can run with a minimum system RAM of 64 MB, of which only 20MB remain for programs once the operating system and high-level services have been loaded and started. Unlike the desktop Sun JVM, Dalvik does not use a memory-expensive stack data structure to represent its current state. Instead, it is register based, which makes it less flexible but more memory and energy efficient <a class="citation" href="pages/dev/android.html#cite-3">(p. 19)</a>.
+            </p>
+
+            <p>
+                JIT compilation was introduced to the DVM with Android version 2.2 and again is specifically designed to run on multiple virtual machines at the same time with very low memory usage. While the Sun JVM uses method bases JIT, Dalvik's is trace based. Method bases Just-In-Time compilation tracks the usage of different methods and compiles them at this coarse level as well. As this optimisation is very coarse, it required a larger amount of memory and compilation time while not always focussing on the most executed calls. Trace-based JIT only optimises at the control path level, which makes the compilation more efficient, as only relevant "hot" code is translated. Furthermore, the trace length is limited to 100 operations. This method, however, also makes reusing compiled code in other threads difficult. Furthermore, if an exception is thrown, the interpreter needs to take over after a rollback to the previous state, which can result in large overhead. Still, with those constraints, JIT was possible on low memory devices, and for example, the trace length could be extended on phones with larger memory availability <a class="citation" href="pages/dev/android.html#cite-3">(p. 23)</a>.
+            </p>
+
+            <h2>Optimisations to Android</h2>
+
+            <p>
+                The Android Runtime <a class="citation" href="pages/dev/android.html#cite-5">(5)</a> was first introduced in Android 4.4 Kitkat and entirely replaced the Dalvik VM in version 5.0 Lollipop. Its most important improvement was the integration of AOT compilation. To ensure backward compatibility, programs still can use the same bytecode format as the DVM. At install time, this format is compiled into a new compiled binary format. When the application is used at runtime, it is checked whether all code exists in the compiled format. The final executed machine code can come from either there or can be substituted by interpreted cold code or JIT compiled hot code from the original bytecode. The new Just-In-Time compiler is also used to continuously improve the performance by analysing the control flow and using dynamic runtime information.
+            </p>
+
+            <figure style="width: calc(100% - 2em); max-width: 572px">
+                <img src="pages/dev/android/jit-workflow.png" alt="JIT compilation data flow">
+                <figcaption>Fig. 1: JIT compilation data flow <a class="citation" href="pages/dev/android.html#cite-6">(6)</a></figcaption>
+            </figure>
+
+            <p>
+                Similar to the implementation of the system drivers and native libraries like the OpenGL rendering API, programmers can use C and C++ to develop code that is always compiled and provides lower level functionality. Apart from the performance of critical sections like 3D rendering,  the reusability of common external C libraries is reduced as well. One of the advantages is the manual memory management instead of Java's garbage collection. Especially in earlier versions of Android, using C achieved speedups between three and four times <a class="citation" href="pages/dev/android.html#cite-7">(7)</a>. However, with the AOT compilation in the Android runtime and the increased use of 64bit hardware, the gap has decreased. There are also use cases in which Java performs slightly better because of small optimisations. In general, the native code remains essential for high performance, energy efficient low-level tasks while Java still is used as the primary language for the applications.
+            </p>
+
+            <p>
+                One major disadvantage comes with the interoperability between the Java and native code. As most APIs like networking are implemented natively, most applications make use this functionality. A study by four researchers from the University of Southern California from 2014 <a class="citation" href="pages/dev/android.html#cite-8">(8)</a> showed that about 85% percent of the energy is consumed by API calls, while only 2% come from the developers' bytecode on average. Of those, the most expensive were networking, the camera and SQLite database access. <a class="citation" href="pages/dev/android.html#cite-8">(p. 125)</a>This problem comes not only from the high consumption of for instance Internet access, which can be improved in <a href="pages/nac/index.html">various ways</a>. Furthermore, when the Java code calls native functions, the necessary libraries often need to be loaded at runtime. It is, therefore, important to both reduce the number of API calls as well as decrease the amount of energy needed for those calls.
+            </p>
+
+            <figure>
+                <img src="pages/dev/android/energy-distribution.png" alt="Non-idle energy consumption">
+                <figcaption> Fig. 2: Non-idle energy consumption on Android <a class="citation" href="pages/dev/android.html#cite-8">(8: p. 125)</a></figcaption>
+            </figure>
+
+            <h2>Conclusion</h2>
+
+            <p>
+                Android as an operating system shows the high priorities of both reduced development difficulty and energy consumption. Even though Java as a language run in a virtual machine consumes more energy and memory than compiled languages like C, the continuous improvement of the Android specific VM to include both AOT and JIT compilation, as well as low memory overhead, have merged the two goals. While the ability to write native code is an opportunity for more energy efficient code, the expense of the interoperability still has a significant impact. To develop applications with a smaller footprint, it is, therefore, essential to reduce the number of API calls and work on improving the compilers for both Java and C.
+            </p>
+
+            <footer>
+                <hr>
+
+                <h4>References</h4>
+
+                <cite id="cite-1">(1) Google. <i>Android robot</i>. Android is a trademark of Google LLC. Released under the Creative Commons 3.0 Attribution License. Available from: <a href="https://developer.android.com/distribute/marketing-tools/brand-guidelines.html">https://developer.android.com/distribute/marketing-tools/brand-guidelines.html</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-2">(2) Gartner. <i>Global market share held by the leading smartphone operating systems in sales to end users from 1st quarter 2009 to 2nd quarter 2017</i>. 2017. Available from: <a href="https://www.statista.com/statistics/266136/global-market-share-held-by-smartphone-operating-systems/">https://www.statista.com/statistics/266136/global-market-share-held-by-smartphone-operating-systems/</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-3">(3) Stefan Brähler. <i>Analysis of the Android Architecture</i>. Studienarbeit. Karlsruher Institut für Technologie; 2010. Available from: <a href="https://www.it.iitb.ac.in/frg/wiki/images/2/20/2010_braehler-stefan_android_architecture.pdf">https://www.it.iitb.ac.in/frg/wiki/images/2/20/2010_braehler-stefan_android_architecture.pdf</a> [Accessed: 6th March 2018]</cite>
+                <cite id="cite-4">(4) Google. <i>Platform Architecture</i>. Available from: <a href="https://developer.android.com/guide/platform/index.html">https://developer.android.com/guide/platform/index.html</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-5">(5) Google. <i>ART and Dalvik</i>. Available from: <a href="https://source.android.com/devices/tech/dalvik/">https://source.android.com/devices/tech/dalvik/</a> [Accessed: 5th March 2018]. 2017</cite>
+                <cite id="cite-6">(6) Google. <i>Implementing ART Just-In-Time (JIT) Compiler</i>. Available from: <a href="https://source.android.com/devices/tech/dalvik/jit-compiler">https://source.android.com/devices/tech/dalvik/jit-compiler</a> [Accessed: 5th March 2018]. 2017</cite>
+                <cite id="cite-7">(7) Gary Sims. <i>Java vs C app performance – Gary explains</i>. Available from: <a href="https://www.androidauthority.com/java-vs-c-app-performance-689081/">https://www.androidauthority.com/java-vs-c-app-performance-689081/</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-8">(8) Ding Li, Shuai Hao, Jiaping Gui, William G.J. Halfond. An Empirical Study of the Energy Consumption of Android Applications. In: <i>2014 IEEE International Conference on Software Maintenance and Evolution</i>. IEEE Computer Society. Victoria: IEEE; 2014. p. 121-130. Available from: <a href="https://doi.org/10.1109/ICSME.2014.34">https://doi.org/10.1109/ICSME.2014.34</a> [Accessed: 5th March 2018]</cite>
+            </footer>
+        </article>
+
+        <script src="slideMenu.js"></script>
+    </body>
+
+</html>

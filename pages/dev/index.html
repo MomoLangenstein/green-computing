@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <base href="../../">
+        <link rel="stylesheet" type="text/css" href="menuStyle.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <link rel="stylesheet" type="text/css" href="pages/dev/introduction/introduction.css">
+
+        <title>Software Development &middot; Green Computing</title>
+    </head>
+
+    <body>
+        <nav>
+            <ul class="sidenav">
+                <li>
+                    <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+                </li>
+                <hr style="border-style: solid; color: var(--main)">
+                <li>
+                    <a href="index.html#menu">Home</a>
+                </li>
+                <li>
+                    <a href="pages/theory/consumption.html">Theory</a>
+                </li>
+                <li>
+                    <a class="active">Software Development</a>
+                    <ul style="list-style-type: none">
+                        <li>
+                            <a class="active">Introduction</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/analysis.html">Energy Estimates</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/languages.html#article">Language Efficiency</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/languages.html#tool">Language Comparison Tool</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/android.html">Android&trade; Architecture</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="pages/ppm/acpi.html">Power Management</a>
+                </li>
+                <li>
+                    <a href="pages/nac/index.html">Networking</a>
+                </li>
+                <li>
+                    <a href="pages/development-tips.html">Practical Tips</a>
+                </li>
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+            <i></i>
+        </div>
+
+        <article>
+            <header>
+                <h1>Software Development</h1>
+                <span style="font-size: 1.3em; color: grey">How energy efficiency can be part of development with specific tooling, the choice of the programming language and the design of the Android&trade; architecture</span>
+            </header>
+
+            <p>
+                Unlike in the early days of computing, the vast majority of programs are no longer written in the only language computers understand. Machine code gives the highest amount of control
+                over the actual execution of a procedure to the programmer.
+                However, the increasing amount of code complexity and diversity of machine code by different manufacturers have required the addition of multiple layers of abstraction.
+            </p>
+
+            <p>
+                The balance between the amount of low-level access, i.e. the ability to directly target internal functionality provided by a computer, and abstraction has been handled very differently. The higher the level of interaction is, the more machine code is necessary in between to mediate, which increases the amount of energy consumed. However, a lot of those techniques such as compilation, i.e. the translation from program into machine code, have been developed for decades and can provide general optimisations for most use cases. Furthermore, they can free up resources to work on project-specific efficiency problems.
+            </p>
+
+            <figure>
+                <img src="pages/dev/introduction/smartphone-users.png" alt="Predicted smartphones worldwide installed base 2008 to 2017">
+                <figcaption>Fig. 1: Predicted amount of smartphones worldwide <a class="citation" href="pages/dev/index.html#cite-1">(1: p.17)</a><br>5 billion unique users of mobile devices were reached in June 2017 <a class="citation" href="pages/dev/index.html#cite-2">(2)</a></figcaption>
+            </figure>
+
+            <figure>
+                <img src="pages/dev/introduction/smartphone-sales.png" alt="Smartphones sales worldwide 2007 to 2017">
+                <figcaption>Fig. 2: Smartphone sales worldwide <a class="citation" href="pages/dev/index.html#cite-3">(3)</a></figcaption>
+            </figure>
+
+            <p style="clear: both">
+                As the amount of mobile and embedded devices has drastically increased, the impact code implementation has on the environmental footprint has as well. On the lowest level, every line of code is responsible for a certain amount of energy consumed by the device. Giving developers the opportunity to estimate this cost during programming on a fine grain level can be a powerful tool for creating efficient and power saving algorithms. Furthermore, extensive benchmarks can improve the choice of technologies based on their performance in the types of procedures that they will be used for in a particular project.
+            </p>
+
+            <p>
+                Developers of mobile software have been leading the effort to create more energy efficient software, particularly because of the increased constraints on computational speed, provided memory, as well as power availability applications, they have to work with. Even though smartphones are manufactured using similar processors, the architectural structure presented to the programmers differs from normal PCs. As mobile devices are typically used with a more limited, often personal purpose, security and compatibility are of high importance. Therefore, the actual applications are separated from the hardware in extra layers of abstraction, and some features including access to the Internet or camera are restricted and thereby provide fewer possibilities for case-specific optimisations.
+            </p>
+
+            <p>
+                Mobile green computing is a very challenging and an area of vibrant research. Tools created and data collected which give developers detailed feedback about the efficiency of their code as well as the programming language of their choice can be used to help guide the process of coding. Furthermore, knowledge about the visible architecture and associated cost of its functionalities are essential to reduce the amount of energy used significantly.
+            </p>
+
+            <h2>Estimating Energy Consumption of Applications</h2>
+
+            <p>
+                The mobile market stands out with its greater homogeneity of operating systems than there is among personal computers. More than 80% of all smartphones run a version of Android, while the remaining 10-20% can almost entirely be attributed to iOS <a class="citation" href="pages/dev/index.html#cite-4">(4)</a>. Still, the absolute energy consumption of running the same program on different hardware varies, which restricts statements about performance only to be relative. Theoretical analysis of the actual code can be used to make more universal estimations, instead, and has the advantage of allowing programmers to approximate the energy efficiency at different levels of granularity without having to measure it in practice. Therefore, recent research has looked into different ways of modelling the power usage of mobile applications. They range from comparisons with calibration data to the analysis of abstract representations of code and the execution paths it takes.
+            </p>
+
+            <p>
+                The <a href="pages/dev/analysis.html">article about energy estimates</a> presents some of the different approaches to obtain approximations of the energy consumption of programs and evaluates their possible impact on development.
+            </p>
+
+            <h2>Energy Efficiency of Programming Languages</h2>
+
+            <p>
+                Programming languages are the interface software engineers use to declare the functionality of their programs. Since the invention of computers, several new ways to implement programs efficiently and elegantly have been discovered. Some languages that are still used today like C or Pascal have been created in the 1970s or earlier when the first computers intended for personal usage were released, while others like Go or Rust were introduced around or after 2010. They use different models of execution ranging from static compilation to dynamic interpretation as well as various paradigms. Those differences have a substantial impact on the amount of energy used during the execution time of a program as well as the amount of memory that is needed.
+            </p>
+
+            <p>
+                An overview of the methods and results of comparing programming languages with those criteria is provided in the <a href="pages/dev/languages.html#article">article about their efficiency</a> and accompanied by a <a href="pages/dev/languages.html#tool">tool to analyse the complete dataset</a>.
+            </p>
+
+            <h2>Execution Model of the Android&trade; Architecture</h2>
+
+            <p>
+                The Android operating system developed by Google was first released in 2008 and is based on the Linux kernel. It consists of a hierarchy of layers of abstraction with the popular programming language Java at the top. Both are designed around the "Write once, run anywhere" principle making all programs independent of the underlying hardware. However, the reduced amount of complexity for developers has had a negative impact on the energy efficiency of the applications. Therefore, Google has introduced different improvements to their architecture including just-in-time and ahead-of-time compilation. Furthermore, interoperability with native code written in C or C++ and the new <b>A</b>ndroid <b>R</b>un<b>T</b>ime have been added, which improve performance and reduce the power consumption in most use cases.
+            </p>
+
+            <p>
+                The specific challenges of green computing can be found in the <a href="pages/dev/android.html">article about the Android architecture</a>, which also assesses the viability of its advancements.
+            </p>
+
+            <footer>
+                <hr>
+
+                <h4>References</h4>
+
+                <cite id="cite-1">(1) GSMA. The Mobile Economy 2014. <i>Smartphones worldwide installed base from 2008 to 2017 (in millions)</i>. 2014. Available from: <a href="https://www.statista.com/statistics/371889/smartphone-worldwide-installed-base/">https://www.statista.com/statistics/371889/smartphone-worldwide-installed-base/</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-2">(2) GSMA. <i>Number of Mobile Subscribers Worldwide Hits 5 Billion</i> [press release]. 2017. Available from: <a href="https://www.gsma.com/newsroom/press-release/number-mobile-subscribers-worldwide-hits-5-billion/">https://www.gsma.com/newsroom/press-release/number-mobile-subscribers-worldwide-hits-5-billion/</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-3">(3) Gartner. <i>Number of smartphones sold to end users worldwide from 2007 to 2017 (in million units)</i>. 2018. Available from: <a href="https://www.statista.com/statistics/263437/global-smartphone-sales-to-end-users-since-2007/">https://www.statista.com/statistics/263437/global-smartphone-sales-to-end-users-since-2007/</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-4">(4) Gartner. <i>Global market share held by the leading smartphone operating systems in sales to end users from 1st quarter 2009 to 2nd quarter 2017</i>. 2017. Available from: <a href="https://www.statista.com/statistics/266136/global-market-share-held-by-smartphone-operating-systems/">https://www.statista.com/statistics/266136/global-market-share-held-by-smartphone-operating-systems/</a> [Accessed: 5th March 2018]</cite>
+            </footer>
+        </article>
+
+        <script src="slideMenu.js"></script>
+    </body>
+
+</html>

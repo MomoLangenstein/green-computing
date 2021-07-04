@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Threads &middot; Power Management &middot; Green Computing</title>
+    <style>article > figure { width: 90%; }</style>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a class="active">Power Management</a>
+                <ul style="list-style-type: none">
+                    <li><a href="pages/ppm/acpi.html">Introduction to ACPI</a></li>
+                    <li><a href="pages/ppm/power.html">Power to the OS</a></li>
+                    <li><a class="active">Balancing threads</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/nac/index.html">Networking</a>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+        <header>
+            <h1>A Balancing Act with Threads</h1>
+            <span>The work of the scheduler never ends</span>
+        </header>
+        <p>The concept of a thread has not been alien to computing for a long time. Before even the first multicore processors came into manufacture and widespread usage, threads of execution, representing a sequence of executing instructions, have been
+            used to both isolate code at runtime and optimise use of available hardware resources.</p>
+        <p>Multithreading, a process by which a computer seemingly does many things at the same time, even with a processor which initially appears only able to perform tasks sequentially, has become a central tenet to most areas of computing. What is it
+            which controls and manages these threads, and how do they relate to the management of power?</p>
+        <h2>The thread scheduler</h2>
+        <figure>
+            <img src="pages/ppm/scheduler.svg" alt="The role of a scheduler">
+            <figcaption>Fig. 5: The role of a scheduler <a class="citation" href="pages/ppm/threads.html#cite-threadpool">(2)</a></figcaption>
+        </figure>
+        <p>The thread scheduler is a component of the operating system kernel, which at its core allocates work to be done to physical hardware resources capable of performing that work. (It may be of interest to note that in Windows, this is called the "dispatcher".) Fig. 5 provides a very abstract overview of any scheduler: it maintains
+            a work queue of tasks, assigning each to available resources according to some algorithm, and ideally maintains that each individual task will be certain to make progress.</p>
+        <p>What does it mean for all threads to make progress? A good scheduler design will ensure that a heavy workload carried out in one thread of execution will not, assuming all threads have equal priority, starve other threads from processor time.
+            In modern PC architectures, hardware support for <em>pre-emptive multitasking</em> enables the kernel to pre-empt — forcibly suspend the currently executing thread — and return control to the scheduler, which then decides the next thread or threads
+            to resume.</p>
+        <p>In essence, a scheduling algorithm balances one or more of the following requirements in deciding the optimal allocation of resources:</p>
+        <ol>
+            <li>Priority and affinity: higher priority threads have more time to do work, and affinitised threads are gated to run on a subset of processor (cores).</li>
+            <li>Latency or Quality of Service requirements: a media playback thread may be lightweight but have tighter requirements on how long it can take to respond to ensure smooth playback.</li>
+            <li>Historical execution metrics: depending on previous measured executions of a given thread, such as time to finish or the core on which it was run, a scheduler may attempt to delay pre-emption to allow work to complete, or reassign a thread
+                to the same core to make use of relevant data still present in the core's cache.</li>
+            <li>User-visible operations: allowing greater priority for work which is visible to users, such as the <abbr title="User Interface">UI</abbr> of an application, in which slowness would impact experience.
+        </ol>
+        <h2>But what about power?</h2>
+        <p>Of course, this article is interested in what the scheduler can do to realise power savings in a system. We have already examined the interfaces available to the system in the first article, and the components present in the OS to use them. Then,
+            there is a fifth requirement a modern scheduler takes into account:</p>
+        <ol start="5">
+            <li>CPU power usage: threads should be executed in a way which balances energy usage and performance.</li>
+        </ol>
+        <p>How is this achieved? Recall, from the previous article the responsibilities of the power manager component. It keeps track of various characteristics of each logical core in the system, including but not limited to the current power state and
+            clock frequency, maintains a table describing all supported states, their power draw, and the latencies associated with a transition to or from them.</p>
+        <p>Most importantly, in the context of threading, the power manager communicates with the thread scheduler to both provide the algorithm with profile data that factors into the scheduling decision, and receives information on load and activity which
+            hints the most appropriate subsequent power state to place cores in when the power manager next makes a decision.</p>
+        <figure>
+            <img src="pages/ppm/scheduler-manager-interactions.svg" alt="Interactions between the scheduler and power manager">
+            <figcaption>Fig. 6: The interactions between the thread scheduler and power manager</figcaption>
+        </figure>
+        <p>Introduced here then, is the concept of a power manager <em>quantum</em>, a period of time where it is known the manager will not make any changes to the performance state of processor cores. In one quantum, the thread scheduler will make a decision, and allocate cores appropriately to threads.</p>
+        <p>In the actual process itself, the scheduler has many heuristics with which it can make its call. Foremost, given data on transition costs, it will attempt to avoid unnecessarily scheduling threads to cores which have a high cost to begin execution. This means that if a core is in a deep idle state, where it may have its cache flushed and/or clock highly gated, a thread due for resumption will first be queued to run on more active cores.</p>
+        <p>The scheduler may further decide to pre-empt a lower priority thread, if the heuristic concludes that leaving the core sleeping is worthwhile. And indeed, a naive algorithm which attempts to maximise usage of all cores for performance instead of efficiency, may incur an even greater overhead of awakening a deeply sleeping core; potentially worsening latencies, something which — if such a thread were a critical audio thread with tight deadlines — would be completely unacceptable.</p>
+        <figure>
+            <img src="pages/ppm/coalesced-before.png" alt="Before coalescing of tasks">
+            <img src="pages/ppm/coalesced-after.png" alt="After coalescing of tasks">
+            <figcaption>Fig. 7: An example of before and after timer coalescing <a class="citation" href="pages/ppm/threads.html#cite-coalescing">(3)</a></figcaption>
+        </figure>
+        <p>Evidently, such an example demonstrates that performance and power efficiency need not be mutually exclusive. A third major optimisation is given the name <em>Timer Coalescing</em>, and is implemented on more recent OS versions across many different vendors. Once again, bearing in mind the costs associated with changing states in a processor, a scheduler may attempt to group together, or in other words, coalesce threads which it knows will need to start running at around the same time. This way, frequent movement between performance and idle states which would otherwise have been caused by various incoming threads being serviced immediately, as opposed to in batches, is reduced or eliminated entirely.</p>
+        <p>Take a look at Fig. 7; before this optimisation was applied, average power consumption hovers around 80% of the maximum on account of needless transitions when cores are in the worst case woken up right after they are put to sleep, or in the best case remain idle at a power-hungry state in anticipation of a new thread arriving soon. After the grouping is applied, the scheduler can make use of well-defined periods in which the processor runs at high performance to finish all pending tasks, and remains at rest for the remainder of the time, achieving dramatic improvements in average power draw, now around 50%.</p>
+        <h2>Closing thoughts</h2>
+        <p>A modern PC (this of course, includes mobile phones, tablet computers, Macs, and all that are <em>personal</em> computing devices) is complex and interconnected; this is why this website exists. The task of the operating system is to mediate all the competition for a system's resources, and act as arbitrator between power-oblivious and heavy workloads, light and conservative apps, and ultimately, the user's experience and power bill. It needs to exploit all the underlying platform has to offer in terms of both performance and efficiency, and decide which of these to prioritise many thousands of times a second. As preserving the environment, improving battery life, and maintaining efficiency of software becomes ever more important, hopefully these series of articles has helped in casting light on what goes on behind the scenes to make that a reality. <i>~tigerw 2018</i></p>
+        <footer>
+            <hr>
+            <h4>Citations</h4>
+            <cite id="cite-scheduler">(1) Vishal Sharda, Bruce Lee Worthington. <i>Thread scheduling based on performance state and idle state of processing units.</i> US9652027B2 (Patent) 2015.</cite>
+            <cite id="cite-threadpool">(2) Cburnett. <i>A simple thread pool.</i> 2007. Available from: <a href="https://en.wikipedia.org/wiki/File:Thread_pool.svg">https://en.wikipedia.org/wiki/File:Thread_pool.svg</a> [Accessed: 28th February 2018].</cite>
+            <cite id="cite-coalescing">(3) Nate Anderson (ArsTechnica). <i>How OS X “Mavericks” works its power-saving magic.</i> 2013. Available from: <a href="https://arstechnica.com/gadgets/2013/06/how-os-x-mavericks-works-its-power-saving-magic">https://arstechnica.com/gadgets/2013/06/how-os-x-mavericks-works-its-power-saving-magic</a> [Accessed: 11th March 2018].</cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

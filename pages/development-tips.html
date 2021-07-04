@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Practical Tips &middot; Green Computing</title>
+</head>
+
+<body>
+    <nav style="margin-left: 0px">
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a href="pages/nac/index.html">Networking</a>
+            </li>
+            <li>
+                <a class="active">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+            <h1>Useful Techniques for Developing Sustainable Software</h1>
+            <h2 class="pinline">
+                <span>Note</span>
+            </h2>
+            <p class="note">This article encompasses and summarizes various approaches for developing energy-aware software. If you read this,
+                we assume that you are familiar with basic aspects of coding and software development already.</p>
+            <hr>
+            <h2>Faster generally means more energy efficient</h2>
+
+            <p>
+                It is natural to think that computers "work harder" to get the job done faster. However, in reality, it is often the opposite
+                — doing things faster means doing fewer things. More precisely, faster computing allows the processor to idle for longer periods of time. By idling, we mean going to more efficient energy state (you can read more about energy
+                states
+                <a href="pages/ppm/acpi.html">here</a>). Even if the difference is not noticeable to the user, it is not an excuse for not optimising the code since the difference in power consumption may be quite noticeable.
+            </p>
+            <h2>Data efficiency</h2>
+            <p>
+                Sending data between processor and memory via the data bus is much costlier regarding energy than operating with it within the CPU. Using disk IO is even worse. Use processor caching as much as possible; and try to reduce the data movement
+                in general, i.e. use disk IO only when it is necessary.
+            </p>
+            <h2>Less loops, more events</h2>
+            <p>
+                Quite often the algorithm needs to check whether a certain condition in another part of the program has been met to continue working. There are two main ways to do it: polling and event system. The polling technique is constantly fetching the state of some variables and performs logical operations using them. An event system is an opposite
+                &mdash; when something happens in the code, other parts which depend on it get notified.
+            </p>
+            <p>
+                For greener software, you should avoid using polling as much as you can, especially if checking the condition involves fetching something from memory. The only exception is when you
+                <b>know</b> that using polling would be more efficient as the condition is not going to be checked too many times.
+                In this case, or if you have to use polling for some other reason, you should try to reduce its frequency.
+            </p>
+            <h2>Decrease the system timer frequency</h2>
+            <p>
+                When software does something periodically, it needs a timer. Reducing the rate of the system timer is often necessary for applications to run smoothly. However, it is less energy efficient as well.
+            </p>
+            <!-- Images should have a border with explanation and a reference -->
+            <figure>
+                <img src="pages/theory/theory/timer-resolution-diagram.png">
+                <figcaption>
+                    Fig. 1: Power impact of increasing Periodic Timer resolution
+                    <a class="citation" href="pages/development-tips.html#cite-1">(1)</a>
+                </figcaption>
+            </figure>
+
+            <!-- {https://software.intel.com/sites/default/files/developing_green_software.pdf -->
+            <p>Use increased timer rate only when necessary and swiftly turn it back to normal.</p>
+            <h2>Low-level programming</h2>
+            <p>
+                The high-level programming languages, such as Java and Python, are designed mainly for easier usage and readability. Although not as performant as low-level languages, they allow writing programs swiftly and making sure that these programs are robust and maintainable. These are the main requirements for today's software, as powerful hardware takes care of most of the performance issues. Hence, almost all of the software products today are written with high-level
+                code.
+            </p>
+            <p>
+                The usability comes at the cost of performance because "high-level" means a high level of abstraction &mdash; mainly, from hardware. However, as stated earlier, increasing software efficiency will inevitably lead to saving the energy. Therefore,
+                using low-level programming in languages such as C can make your software more sustainable.
+            </p>
+            <p>
+                Have a look at our
+                <a href="pages/dev/languages.html#tool">language comparison tool</a>, which comprises results of efficiency testings of 27 popular languages used for
+                solving various computational problems. With several exceptions, the general trend is quite simple &mdash; the
+                more high-level the language is, the less performant it is, and therefore more energy is consumed.
+            </p>
+            <h2>Disable peripherals when they are not being used</h2>
+            <p>
+                Peripherals such as keyboard and mouse do not consume much energy, but this may not the be case for printers, external hard drives, etc. You need to put them into a sleep state or even disable them completely when they are unused
+                to avoid energy leaks.
+            </p>
+            <h2>Use interfaces with background switching</h2>
+            <p>
+                Various implementations of an interface may be used in one program. You may consider changing them either in response to the change of program state or because of the change of the power supply. This study
+                <a class="citation" href="pages/dev/index.html#cite-2">(2)</a> comprises experimentation results of energy consumption of various different data structures extending
+                same interfaces with different data workloads. The researchers pursue to create an ultimate green data structure,
+                which can change its implementation automatically to ensure the highest possible efficiency. Unfortunately, the researchers are not finished with it, but you can already consider using some of their results and ideas for your software.
+            </p>
+
+        <footer style="text-align: left; overflow-wrap: break-word;">
+            <hr>
+            <h4>References</h4>
+
+            <cite id="cite-1" class="reference">(1) Dr Bob Steigerwald, Abhishek Agrawal. Developing Green Software.<i>Intel</i>. 2011. Available from: <a href="https://software.intel.com/sites/default/files/developing_green_software.pdf">https://software.intel.com/sites/default/files/developing_green_software.pdf</a> [Accessed 5th March 2018]</cite>
+            <cite id="cite-2" class="reference">(2) Junya Michanan, Rinku Dewri,  Matthew J. Rutherford. <i>Predicting data structures for energy efficient computing.</i> 2015 Sixth International Green and Computing Conference (IGSC). [Online] IEEE; 2015. Available from: <a href="https://doi.org/10.1109/IGCC.2015.7393698">https://doi.org/10.1109/IGCC.2015.7393698</a> [Accessed 11th March 2018]</cite>
+        </footer>
+
+        <script src="slideMenu.js"></script>
+    </article>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Green Computing</title>
+</head>
+
+<body>
+    <nav id="menu" style="margin-left: -250px; position: fixed">
+        <ul class="sidenav">
+            <li>
+                <a class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a class="active">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a href="pages/nac/index.html">Networking</a>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 0px" onclick="toggleMenu()">
+        <i style="transform: translateX(4px) rotate(-45deg)"></i>
+    </div>
+
+    <article style="width: 95%">
+        <h1 style="font-size:3.5em; margin: 0 auto; margin-top: 0.5em" class="makeWideOnMobile">Green Computing</h1>
+
+        <br>
+
+        <blockquote style="border-left: unset; margin: 0 auto;" class="makeWideOnMobile">
+            <h2>Why do we need green computing?</h2>
+            <p>
+                Energy efficiency is a subject which affects everyone either directly through the amount of power we consume on a daily basis or indirectly with the damage to the environment caused by its generation. As private users of personal computers or smartphones, it influences the duration in between charging times, while significantly decreasing the costs of, e.g. server clusters for companies. Therefore, the energy efficiency of computers has become of increasingly large importance to consumers and manufacturers.
+            </p>
+        </blockquote>
+
+        <br>
+        <br>
+
+        <blockquote style="border-left: unset; margin: 0 auto;" class="makeWideOnMobile">
+            <h2>What is this website about?</h2>
+            <p>
+                This website is aimed at everyone, who wants to know about how the systems we use are already built to reduce their use of power and how their efficiency could be increased in the future. It does not cover the manufacturing process of computers or general ways of saving energy like dimming the screen. Instead, the website focuses on techniques, challenges and current research in the theory of energy consumption, software development aimed at a reduced footprint and the impact of power management and networking hardware. The information is mostly separated into these subtopics in several articles with different degrees of theoretical or practical approaches. Just start with whatever interests you most and let the natural flow of and between the subjects guide you through:
+            </p>
+        </blockquote>
+        <br>
+        <br>
+        <br>
+
+        <hr style="width=200%">
+        <table style="width:100%; height:1%; margin: 0 auto;">
+            <tr>
+                <td style="width:45%; margin: 0 auto; font-size:1.1em" class="padLeft">
+                    <p><a style="color:var(--main); font-weight: 600;" href="pages/theory/consumption.html">The Theory section</a> explains how the energy is consumed on different devices</p><p>It also provides information about some theoretical
+                    limits of energy efficiency.</p>
+                </td>
+                <td style="width:5%; margin: 0 auto" class="hideOnMobile"></td>
+                <td style="width:50%;  margin: 0 auto" class="hideOnMobile">
+                    <div style="margin: 0 auto; width:60%; position: relative">
+                        <img src="img/atom.svg" style="width: 100%">
+                        <a class="citation" href="index.html#cite-1" style="font-size:0.75em;position: absolute; bottom: 1em; right: 1em">(1)</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <hr style="width=200%">
+        <table style="width:100%; height:1%; margin: 0 auto">
+            <tr>
+                <td style="width:50%; margin: 0 auto" class="hideOnMobile">
+                    <div style="margin: 0 auto; width:60%; position: relative">
+                        <img src="img/dev.svg" style="width: 100%">
+                        <a class="citation" href="index.html#cite-2" style="font-size:0.75em;position: absolute; bottom: 1em; left: 1em">(2)</a>
+                    </div>
+                </td>
+                <td style="width:5%;  margin: 0 auto" class="hideOnMobile"></td>
+                <td style="width:45%;  margin: 0 auto; font-size:1.1em" class="taleftOnM padRight">
+                    <p>The energy efficiency of applications is heavily influenced by the way the software is written.</p><p>In the <a style="color:var(--main); font-weight: 600;" href="pages/dev/index.html"> Software Development section</a>, ways of improving this process to aim at reduced power consumption are presented.</p>
+                </td>
+            </tr>
+        </table>
+        <hr style="width=200%">
+        <table style="width:100%; height:1%; margin: 0 auto">
+            <tr>
+                <td style="width:45%; margin: 0 auto; font-size:1.1em" class="padLeft">
+                    <p>When the programs are executed, the operating system must allocate limited hardware resources to them. </p><p>The articles on <a style="color:var(--main); font-weight: 600;" href="pages/ppm/acpi.html">Power Management</a> describe how these allocations are made with energy usage in mind.</p>
+                </td>
+                <td style="width:5%; margin: 0 auto" class="hideOnMobile"></td>
+                <td style="width:50%;  margin: 0 auto" class="hideOnMobile">
+                    <div style="margin: 0 auto; width:60%; position: relative">
+                        <img src="img/ppm.svg" style="width: 100%">
+                        <a class="citation" href="index.html#cite-3" style="font-size:0.75em; position: absolute; bottom: 1em; right: 1em">(3)</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <hr style="width=200%">
+        <table style="width:100%; height:1%; margin: 0 auto">
+            <tr>
+
+                <td style="width:50%; margin: 0 auto" class="hideOnMobile">
+                    <img src="img/nac.svg" style="margin: 0 auto; width: 60%; display: block">
+                </td>
+                <td style="width:5%;  margin: 0 auto" class="hideOnMobile"></td>
+                <td style="width:45%;  margin: 0 auto; font-size:1.1em" class="taleftOnM padRight">
+                    <p>
+                        The ubiquity and versatility of mobile networking allowed mobile devices to become what they are today.
+                    </p>
+                    <p>
+                        Now, in the <a style="color:var(--main); font-weight: 600;" href="pages/nac/index.html">Networking section</a>, it's time to consider the impact of this technology on energy use, and routes towards reducing it.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <hr style="width=200%">
+        <table style="width:100%; height:1%; margin: 0 auto">
+            <tr>
+                <td style="width:45%;  margin: 0 auto; font-size:1.1em" class="taRightonM padLeft">
+                    <p>
+                        If you are a software developer, have a look at the  <a style="color:var(--main); font-weight: 600;" href="pages/development-tips.html">Practical Tips</a> for writing green software.
+                    </p>
+                    <p>The Software Development section also provides an <a style="color:var(--main); font-weight: 600;" href="pages/dev/languages.html#tool">Interactive Tool</a> for comparing the performance and energy-efficiency of different programming languages. </p>
+                </td>
+                <td style="width:5%;  margin: 0 auto" class="hideOnMobile"></td>
+                <td style="width:50%; margin: 0 auto" class="hideOnMobile">
+                    <div style="margin: 0 auto; width:60%; position: relative">
+                        <img src="img/fork.svg" style="width: 100%">
+                        <a class="citation" href="index.html#cite-4" style="font-size:0.75em; position: absolute; bottom: 1em; right: 1em">(4)</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <hr style="width=200%">
+
+        <table style="width:100%; height:1%; margin: 0 auto">
+            <tr>
+
+                <td style="width:50%; margin: 0 auto" class="hideOnMobile">
+                    <div style="margin: 0 auto; width:60%; position: relative">
+                        <img src="img/about.svg" style="width: 100%">
+                        <a class="citation" href="index.html#cite-5" style="font-size:0.75em; position: absolute; bottom: 1em; left: 1em">(5)</a>
+                    </div>
+                </td>
+                <td style="width:5%;  margin: 0 auto" class="hideOnMobile"></td>
+                <td style="width:45%;  margin: 0 auto; font-size:1.1em" class="taleftOnM padRight">
+                    <p>
+                        Learn more about the authors of this website in our <a style="color:var(--main); font-weight: 600;" href="about.html">About section</a>.
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <footer class="makeWideOnMobile hideOnMobile" style="margin-left: auto; margin-right: auto">
+
+                <h4>Subtopic symbols</h4>
+
+                <cite id="cite-1">(1) Karl432. <i>U+269B Atom symbol</i>. Released in the public domain. Available from: <a href="https://commons.wikimedia.org/wiki/File:U%2B269B_Atom_symbol_%E2%80%93_font_DejaVu_Sans.svg" rel="nofollow">https://commons.wikimedia.org/wiki/File:U%2B269B_Atom_symbol_%E2%80%93_font_DejaVu_Sans.svg</a> [Accessed: 11th March 2018]</cite>
+                <cite id="cite-2">(2) Chunk Icons. <i>Software Development</i>. Released under the Creative Commons CCBY License. Available from: <a href="https://thenounproject.com/term/software-development/581062/" rel="nofollow">https://thenounproject.com/term/software-development/581062/</a> [Accessed: 11th March 2018]</cite>
+                <cite id="cite-3">(3) <a href="https://iconmonstr.com">iconmonstr</a>. <i>CPU 4</i>. Available from: <a href="https://iconmonstr.com/cpu-4-svg/" rel="nofollow">https://iconmonstr.com/cpu-4-svg/</a> [Accessed: 12th March 2018]</cite>
+                <cite id="cite-4">(4) <a href="https://www.shareicon.net" rel="nofollow">ShareIcon</a>. <i>Fork icon</i>. Released in the public domain. Availabe from: <a href="https://www.shareicon.net/technology-fork-code-software-coding-software-development-code-fork-657517" rel="nofollow">https://www.shareicon.net/technology-fork-code-software-coding-software-development-code-fork-657517</a> [Accessed: 12th March 2018]</cite>
+                <cite id="cite-5">(5) <a href="http://www.freepik.com" rel="nofollow">freepik</a>. <i>Multiple Users Silhouette</i>. Released under the CC BY 3.0 License. Availabe from: <a href="https://www.flaticon.com/free-icon/multiple-users-silhouette_33308" rel="nofollow">https://www.flaticon.com/free-icon/multiple-users-silhouette_33308</a> [Accessed: 12th March 2018]</cite>
+
+            </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

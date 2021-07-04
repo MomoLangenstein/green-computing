@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+}
+
+nav {
+  width: 250px;
+  transition: margin-left 300ms;
+  position: relative;
+  z-index: 98;
+}
+
+article {
+  transition: left 600ms;
+}
+
+ul.sidenav {
+  background-color: var(--light);
+  list-style-type: none;
+  padding: 0;
+  top: 0;
+  height: 100vh;
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -o-sticky;
+  position: -ms-sticky;
+  position: sticky;
+  box-shadow: inset -5px 0px 25px -10px var(--dark);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+ul.sidenav::-webkit-scrollbar {
+  display: none;
+}
+
+ul.sidenav > li:first-child {
+  padding-top: 1em;
+}
+
+ul.sidenav > li:last-child {
+  padding-bottom: 1em;
+}
+
+ul.sidenav li a:not(.title) {
+  display: block;
+  color: var(--main);
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+ul.sidenav li a.active {
+  border-left: 4px solid var(--main);
+  color: var(--dark);
+  cursor: pointer;
+}
+
+ul.sidenav li a.title {
+  display: block;
+  color: var(--main);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul.sidenav li ul {
+  box-shadow: inset -5px 0px 25px -10px var(--dark);
+  padding-left: 1em;
+  background-color: var(--dimmed);
+}
+
+ul.sidenav li ul li a.active {
+  border-left: 0px solid var(--main);
+  text-decoration: underline;
+}
+
+ul.sidenav li a:hover:not(.active):not(.title) {
+  background-color: var(--light-main);
+  color: var(--light);
+}
+
+div.menuButton {
+    width: 1em;
+    height: 1em;
+    margin-left: -17px;
+    margin-right: 16px;
+    padding: 8px;
+    top: calc(50% - 16px);
+    position: fixed;
+    cursor: pointer;
+    z-index: 99;
+    background-color: var(--light-main);
+    border-radius: 32px;
+    transition: left 300ms;
+    border: solid 2px var(--main);
+}
+
+div.menuButton > i {
+    transform: translateX(3px) rotate(135deg);
+    border: solid var(--dark);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    width: 0.25em;
+    height: 0.25em;
+    transition: all 300ms;
+}
+
+@media screen and (max-width: 600px) {
+    nav {
+        position: fixed;
+    }
+}

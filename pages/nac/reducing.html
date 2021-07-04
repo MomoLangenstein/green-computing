@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Demand Reduction &middot; Networking &middot; Green Computing</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a class="active">Networking</a>
+                <ul style="list-style-type: none;">
+                    <li>
+                        <a href="pages/nac/index.html">Introduction</a>
+                    </li>
+                    <li>
+                        <a class="active" href="pages/nac/reducing.html">Demand Reduction</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/caching.html">Caching</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/improving.html">Improving Network Protocols</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+
+        <header>
+            <h1 style="margin-bottom: 0px">Demand Reduction</h1>
+            <span style="font-size: 1.3em; color: grey">Investigating the effect of reducing network usage on energy usage of mobile devices.</span>
+        </header>
+
+        <p>
+            As previously discussed in the <a href="pages/nac/index.html">introduction</a>, reducing the volume of network data used has significant potential benefits for the user of a mobile device, regarding both reduced energy consumption and also reduced data costs.
+        </p>
+
+        <p>
+            We will explore various methods by which the volume of information transferred can be reduced: precaching and local computation; as well as other ways, including blocking of advertisements and compression.
+
+        <h2>Precaching</h2>
+
+        <p>
+            Similar to caching, precaching (also called prefetching) involves the storage of data locally, so that when (or if) it is required, instead of being transmitted over the network it is simply loaded from the storage. As opposed to regular caching, which simply preserves information already downloaded by request of the user, precaching techniques download information ahead of time, which it is anticipated will be required in the future. This can have significant advantages, but also requires more complex algorithms to maximise the efficiency of the system, to prevent unnecessary resource consumption while ensuring as much useful data as possible is precached <a href="pages/nac/reducing.html#cite-1" class="citation">(1)</a> <a href="pages/nac/reducing.html#cite-2" class="citation">(2)</a>.
+        </p>
+
+        <p>
+            The main opportunities for precaching arise when mobile devices are plugged into the mains, or when on WiFi rather than cellular connections. When on charge, the power overhead of precaching is effectively free, and when on WiFi the power used by downloading is significantly reduced. Precaching techniques for web browsing data and app data have been developed and could be rolled out even to older devices to improve energy consumption <a href="pages/nac/reducing.html#cite-3" class="citation">(3)</a> <a href="pages/nac/reducing.html#cite-4" class="citation">(4)</a>.
+        </p>
+
+        <h2>Local Computation</h2>
+
+        <p>
+            Alternatively, instead of downloading large compiled data sets, it is possible for the operating system or apps to download "source" material, and compile it on the device as required. This could lead to significant savings on data transmitted as these source materials tend to be smaller than the compiled versions. Also, due to their size more of these files can be cached, further reducing the amount of data transmission needed.
+        </p>
+
+        <p>
+            One current application of this technique is map viewing applications, where maps are traditionally distributed as a grid of bitmap images. These image tiles, as they are called, are very inefficient &mdash; whenever the view of the map is moved or the zoom level increased or decreased a new set of tiles must be downloaded. There is also a high degree of redundancy in the tiles due to repetition of icons and shapes. If sets of vector data are used instead of the bitmap tiles, styling information need only be transmitted once, and the map data itself can be much smaller as only the information needed to draw the lines is transmitted. Downloading vector data and rendering it on the device can sometimes even eliminate the requirement for a network completely, as maps for a large area can be downloaded and stored on the device <a href="pages/nac/reducing.html#cite-6" class="citation">(6)</a>.
+        </p>
+
+        <p>
+            Another application of this technique is local speech recognition. Normally, voice samples are sent over the network to a central server that performs the analysis and returns the result, also over the network. However, more advanced machine learning and acoustic modelling techniques have allowed local recognition to be feasible. Google has developed a system so that the processing of speech can be done directly on the device, while still maintaining a reasonable error rate. Furthermore, only 20MiB of data are required to perform this analysis, so this technology can be rolled out even to older devices with limited storage space <a href="pages/nac/reducing.html#cite-5" class="citation">(5)</a>.
+        </p>
+
+        <h2>Other Opportunities: Adblocking and Compression</h2>
+
+        <p>
+            Users' reluctance to pay for app licenses or subscriptions to online services means that the only feasible method of monetising these endeavours is through the use of advertisements. Thus adverts are widespread among mobile apps and on the web. Excepting privacy and manipulatory concerns with this type of marketing, most users find these adverts innocuous &mdash; they do not have to pay for the service they receive, and one can ignore most adverts. However, it has been shown that adding ads to a typical app can increase the total energy consumption of the mobile device by as much as 30&ndash;40%. In addition to this, significant quantities of CPU time and network bandwidth are used by the code dealing with the ads, leading to additional speed and network cost penalties to users, as well as additional time spent by developers to optimise this code <a href="pages/nac/reducing.html#cite-7" class="citation">(7)</a> <a href="pages/nac/reducing.html#cite-8" class="citation">(8)</a> <a href="pages/nac/reducing.html#cite-9" class="citation">(9)</a> <a href="pages/nac/reducing.html#cite-10" class="citation">(10)</a>.
+        </p>
+
+        <p>
+            Therefore, blocking of adverts can save significant quantities of energy on mobile devices, and have other benefits for users. Operating system and platform limitations of mobile devices have so far limited uptake of mobile ad blocking, with only around 7% of devices utilising the technology. However, with increased integration and user awareness this number could well increase.
+        </p>
+
+        <p>
+            Compression of data is a method of reducing its volume during transit or storage, by the application of a reversible set of transformations that remove redundancies. Compression of data during transit can help to reduce the amount of network traffic required, and thus saving energy. Various compression algorithms exist, with different tradeoffs between compression ratio (the ratio of the size before compression to the size afterwards), the time taken to compress data and the time taken to decompress data. Increased usage of data compression on the web, and for data transmissions by apps could decrease energy consumption <a href="pages/nac/reducing.html#cite-11" class="citation">(11)</a> <a href="pages/nac/reducing.html#cite-12" class="citation">(12)</a>.
+        </p>
+
+        <footer>
+            <hr>
+            <h4>References</h4>
+
+            <cite id="cite-1">(1) Kalaboukis C, Davis M, Martinez R. <i>Methods and systems for pre-caching information on a mobile computing device.</i> US8769099B2 (Patent) 2006</cite>
+
+            <cite id="cite-2">(2) James A, Brown G. <i>Pre-caching web content for a mobile device.</i> US9275162B2 (Patent) 2011</cite>
+
+            <cite id="cite-3">(3) Balasubramanian N, Balasubramanian A, Venkataramani A. <i>Energy consumption in mobile phones.</i> Proceedings of the 9th ACM SIGCOMM conference on Internet measurement conference &mdash; IMC ’09. [Online] ACM Press; 2009. Available from: <a href="https://doi.org/doi:10.1145/1644893.1644927">doi:10.1145/1644893.1644927</a></cite>
+
+            <cite id="cite-4">(4) Higgins BD, Flinn J, Giuli TJ, Noble B, Peplin C, Watson D. <i>Informed mobile prefetching.</i> Proceedings of the 10th international conference on Mobile systems, applications, and services &mdash; MobiSys ’12. [Online] ACM Press; 2012. Available from: <a href="https://doi.org/doi:10.1145/2307636.2307651">doi:10.1145/2307636.2307651</a></cite>
+
+            <cite id="cite-5">(5) McGraw I, Prabhavalkar R, Alvarez R, Arenas MG, Rao K, Rybach D, et al. <i>Personalized speech recognition on mobile devices.</i> 2016 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). [Online] IEEE; 2016. Available from: <a href="https://doi.org/doi:10.1109/icassp.2016.7472820">doi:10.1109/icassp.2016.7472820</a></cite>
+
+            <cite id="cite-6">(6) Google Mobile Blog. <i>Under the hood of Google Maps 5.0 for Android.</i> December 2010. Available from: <a href="http://googlemobile.blogspot.co.uk/2010/12/under-hood-of-google-maps-50-for.html">http://googlemobile.blogspot.co.uk/2010/12/under-hood-of-google-maps-50-for.html</a> [Accessed: 28th February 2018]</cite>
+
+            <cite id="cite-7">(7) Visser A. <i>The Effect of Ad Blockers on the Energy Consumption of Mobile Web Browsing.</i> [Preprint] 2016. Available from: <a href="https://pdfs.semanticscholar.org/c2f4/b15d53eeeabbe41e918eefffa9321978f82d.pdf">https://pdfs.semanticscholar.org/c2f4/b15d53eeeabbe41e918eefffa9321978f82d.pdf</a> [Accessed: 10th March 2018]</cite>
+
+            <cite id="cite-8">(8) Albasir A, Naik K, Plourde B, Goel N. <i>Experimental Study of Energy and Bandwidth Costs of Web Advertisements on Smartphones.</i> Proceedings of the 6th International Conference on Mobile Computing, Applications and Services. [Online] ICST; 2014. Available from: <a href="https://doi.org/doi:10.4108/icst.mobicase.2014.257770">doi:10.4108/icst.mobicase.2014.257770</a></cite>
+
+            <cite id="cite-9">(9) Prochkova I, Singh V, Nurminen JK. <i>Energy Cost of Advertisements in Mobile Games on the Android Platform.</i> 2012 Sixth International Conference on Next Generation Mobile Applications, Services and Technologies. [Online] IEEE; 2012. Available from: <a href="https://doi.org/doi:10.1109/ngmast.2012.32">doi:10.1109/ngmast.2012.32</a></cite>
+
+            <cite id="cite-10">(10) Gui J, Mcilroy S, Nagappan M, Halfond WGJ. <i>Truth in Advertising: The Hidden Cost of Mobile Ads for Software Developers</i> 2015 IEEE/ACM 37th IEEE International Conference on Software Engineering. [Online] IEEE; 2015. Available from: <a href="https://doi.org/doi:10.1109/icse.2015.32">doi:10.1109/icse.2015.32</a></cite>
+
+            <cite id="cite-11">(11) Agababov V, Buettner M, Chudnovsky V, Cogan M, Greenstein B, McDaniel S, Piatek M, Scott C, Welsh M, Yin B. Flywheel: Google's Data Compression Proxy for the Mobile Web. <i>InNSDI 2015 May 4 (Vol. 15, pp. 367-380)</i>.</cite>
+
+            <cite id="cite-12">(12) Qian F, Huang J, Erman J, Mao ZM, Sen S, Spatscheck O. How to Reduce Smartphone Traffic Volume by 30%? Passive and Active Measurement. [Online] <i>Springer Berlin Heidelberg; 2013. p. 42–52.</i> Available from: <a href="https://doi.org/doi:10.1007/978-3-642-36516-4_5">doi:10.1007/978-3-642-36516-4_5</a></cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

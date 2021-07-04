@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <base href="../../">
+        <link rel="stylesheet" type="text/css" href="menuStyle.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <link rel="stylesheet" type="text/css" href="pages/dev/common/androidstudio.css">
+
+        <title>Energy Estimates &middot; Software Development&middot; Green Computing</title>
+    </head>
+
+    <body>
+        <script src="pages/dev/common/highlight.pack.js"></script>
+
+        <nav>
+            <ul class="sidenav">
+                <li>
+                    <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+                </li>
+                <hr style="border-style: solid; color: var(--main)">
+                <li>
+                    <a href="index.html#menu">Home</a>
+                </li>
+                <li>
+                    <a href="pages/theory/consumption.html">Theory</a>
+                </li>
+                <li>
+                    <a class="active">Software Development</a>
+                    <ul style="list-style-type: none">
+                        <li>
+                            <a href="pages/dev/index.html">Introduction</a>
+                        </li>
+                        <li>
+                            <a class="active">Energy Estimates</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/languages.html#article">Language Efficiency</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/languages.html#tool">Language Comparison Tool</a>
+                        </li>
+                        <li>
+                            <a href="pages/dev/android.html">Android&trade; Architecture</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="pages/ppm/acpi.html">Power Management</a>
+                </li>
+                <li>
+                    <a href="pages/nac/index.html">Networking</a>
+                </li>
+                <li>
+                    <a href="pages/development-tips.html">Practical Tips</a>
+                </li>
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+            <i></i>
+        </div>
+
+        <article>
+            <header>
+                <h1 style="margin-bottom: 0px">Estimating Energy Consumption of Applications</h1>
+            </header>
+
+            <p>
+                The mobile application market has grown enormously during the past years. An increasing amount of applications need to run on devices with limited energy supply, and users are frequently critical of the short recharge cycles. Software can be written with a decreased energy footprint as a primary goal. However, developers cannot simply guesstimate the efficiency of their program. Furthermore, measuring the actual power draw devices is not easily integrated into the development cycle. Therefore, one focus of recent research has been on finding models to analyse the energy consumption of a program. They can make use of benchmark tests, models of processor architecture as well as logical reasoning methods to predict execution paths through the code. This article will focus on efficient approximate methods leaving out, for example, testing out the code in a modified emulator of a device, as that is very similar to performing practical measurements.
+            </p>
+
+            <h2>Types of energy analysis</h2>
+
+            <p>
+                <b>Dynamic analysis</b> involves testing a program on actual hardware. While the results may be of very high accuracy for common execution paths, the testing takes up a large amount of time <a class="citation" href="pages/dev/analysis.html#cite-1">(1: p. 5f.)</a>. Furthermore, in contrast to the functionality of the code, the energy efficiency of edge cases and sparsely used branches can often not be unit tested outside the context of the entire program. Therefore, observations will mostly describe average use cases and could miss exceptional sources of errors or bottlenecks. This method should preferably be used as a comparison or benchmark for other models, as it does not integrate well into the continuous development process. Safety-critical systems should still thoroughly test code in practice, as large run times can be neglected there.
+            </p>
+
+            <p>
+                <b>Static analysis</b> is used to approximate the energy consumption of a program without having to run it in practice. The method is platform independent and can be executed for example on the programmer's computer. Static analysis requires models of the power usage of the processor for different tasks. The number of times these computational units are executed is calculated with an intermediate, abstract representation of the code such as bytecode. The accuracy can be improved with more detailed reference data as well as logical reasoning about the program to predict the likelihood of certain execution paths <a class="citation" href="pages/dev/analysis.html#cite-1">(p. 6)</a>. While this method can only provide estimates of the energy consumption, its easier usability by programmers during coding and the independence from hardware are its biggest advantages.
+            </p>
+
+            <h2>Approximation with system level data</h2>
+
+            <p>
+                Modern computers provide a large amount of information about their current usage. Those measurements include the current utilisation of the processor and how much CPU time is being spent on execution, waiting and interruptions. Furthermore, the file system, memory and internet connection can also be monitored. Researchers from the National University of Singapore and the Florida International University <a class="citation" href="pages/dev/analysis.html#cite-2">(2)</a> have used this data to experimentally determine that for example the utilisation and idle time have a high correlation with the energy consumption and increase/decrease it respectively. With a supervised learning method, they were able to create a model which takes in the parameters and estimates the power usage with an accuracy of 95% <a class="citation" href="pages/dev/analysis.html#cite-2">(p. 94)</a>. While it still uses practical measurements in the beginning to calibrate their program, their method can effectively estimate the energy consumption of an entire Linux based system not limited to just the CPU afterwards. However, this method is still classified as dynamic analysis, because even though it does not require special measuring hardware after calibration, applications still need to be run and tested manually to assess their efficiency. Furthermore, the approximations can only be made on system or process level, meaning that only the footprint of the entire program and not a single method or line of source code can be measured <a class="citation" href="pages/dev/analysis.html#cite-2">(p. 101)</a>.
+            </p>
+
+            <p>
+                Two researchers from the University of Alberta <a class="citation" href="pages/dev/analysis.html#cite-3">(3)</a> have expanded similar functionality to Android&trade; with the <i>GreenOracle</i> application. They applied four machine learning algorithms to energy consumption data from 24 programs with 984 unique versions in total. After collecting system call traces and CPU utilisation data of test cases, the power consumption of the Android application can be estimated with an error of mostly less than 10% using their trained model <a class="citation" href="pages/dev/analysis.html#cite-3">(p. 49)</a>. While this approach still needs the practical execution of the program for the estimations, the necessary data could be collected during the regular testing of the development cycle. It enables a short but not instant feedback loop for programmers between the compiled version of the code. Therefore, the authors suggest that their software could be used to find so-called energy bugs, which cause unexpected reduced battery life, or to automatically test and rank mobile applications based on their energy efficiency <a class="citation" href="pages/dev/analysis.html#cite-3">(p. 56)</a>.
+            </p>
+
+            <p>
+                One further approach uses the fact that computers operate in different <a href="pages/ppm/power.html">power states</a> and frequently switch between them to reduce the amount of energy being consumed. By capturing when and how often those transitions occur, a coarse approximation of the power usage can be made. This method, however, again does not give programmers information about the particular piece of code they are working on and needs to be tested on hardware. Furthermore, the approach is dependent on the hardware implementation of power states and, therefore, not portable.
+            </p>
+
+            <h2>Program analysis</h2>
+
+            <p>
+                In computer science, it is often required to prove a property of an algorithm or procedure. Static program analysis is a collection of methods to formally and often partly automatically reason about the functionality, correctness and performance of a program. The code is often transformed into an abstract representation to check, e.g. the type system, data and control flow. To estimate the energy consumption of simple code, the control flow is of high importance, as this example shows <a class="citation" href="pages/dev/analysis.html#cite-1">(1: p. 10)</a>:
+            </p>
+
+            <pre><code style="font-size: 16px">void main () {
+    // Counter variable x set to 0
+    int x = 1;
+
+    // Loop executes while x <= 10
+    while (x <= 10) {
+        // The radio is only switched on in iterations 4 and 10
+        if ( x == 4 || x == 10) {
+            radio_on();
+        } else {
+            radio_off();
+        }
+
+        // Couter variable x incremented
+        x++;
+    }
+}</code></pre>
+
+            <p>
+                Even though the entire loop is executed ten times, the specific radio_on function is only called twice. Program analysis can, therefore, be used to express which code is executed how often without having to test it.
+            </p>
+
+            <h2>Source code level estimates</h2>
+
+            <p>
+                At the Radboud University Nijmegen, Stein Keijzers <a class="citation" href="pages/dev/analysis.html#cite-1">(1)</a> extended the static energy analysis tool <i>EcaLogic</i> to enable the estimation of the power consumption of a program written in a subset of the C language. It first compiles the source code, which has been annotated to include information about for example the bounds of loop execution and energy usage of specific external functions, to an abstract syntax tree. The tree is converted into a Java bytecode which represents the functionality and consumption as hardware component models <a class="citation" href="pages/dev/analysis.html#cite-1">(p. 45-50)</a>. To obtain the bounds of the energy consumption, the bytecode is run together with the tool, which uses Java's reflection feature to perform the analysis. Because of the use of annotations, the granularity of the estimates can be defined on a program, method, branch or code line level <a class="citation" href="pages/dev/analysis.html#cite-1">(p. 50)</a>. Even though the various manual steps between writing the source code and obtaining the estimate take up additional time, <i>EcaLogic-C</i> could still provide useful information about the energy efficiency after each compilation. However, the prerequisite of specific annotations makes it impossible to use the tool without previous manual reasoning, e.g. about the termination of loops.
+            </p>
+
+            <p>
+                <i>eLens</i> is a program that was developed by four researchers from the University of Southern California <a class="citation" href="pages/dev/analysis.html#cite-4">(4)</a>. It consists of three components that use a description of the typical workload of a Java program, its bytecode and a platform-specific system profile to generate annotations for the source code which can be viewed by the programmers in an IDE. First, there is the Workload Generator, which uses the description of, e.g. user interactions and the bytecode to information about the execution paths of the program as well as their utilisation. It is combined with the system profile in the Analyser which estimates the amount of consumed energy with an average accuracy of 90% <a class="citation" href="pages/dev/analysis.html#cite-4">(p. 92)</a>. As not all calls to external functions have the same efficiency, the profile is used to define such high-energy events which the researchers showed in their extension <i>vLens</i> <a class="citation" href="pages/dev/analysis.html#cite-5">(5)</a>. Lastly, the Source Code Annotator, which is implemented as a plugin for the Eclipse IDE, combines the path information and energy estimates to create visual feedback for the programmers. Those annotations can be at an individual source line level or summarise code paths, methods or the entire program. Apart from this intuitive way to inform developers about the power consumption of their code while they are working on it, the major advantage of <i>eLens</i> is its portability. System profiles and bytecode can be obtained for most combinations of compiled languages and operating systems. Therefore, <i>eLens</i> could be used not only in the researchers' implementation for Android in Java <a class="citation" href="pages/dev/analysis.html#cite-5">(p. 84)</a>.
+            </p>
+
+            <figure>
+                <img src="pages/dev/analysis/eLens.png" arg="eLens source line visualisation">
+                <figcaption>Fig. 1: eLens source line visualisation <a class="citation" href="pages/dev/analysis.html#cite-4">(4: p. 95)</a></figcaption>
+            </figure>
+
+            <h2>Conclusion</h2>
+
+            <p>
+                Dynamic and static energy analysis models are an important opportunity for developers to estimate the energy consumption of their programs. While platform-dependent testing provides the most accurate results for average use cases, approximations based on system level data and estimates based on the bytecode of the application are alternative approaches, which can be integrated into the continuous development cycle more easily. However, most of the tools developed by the researchers do not reach the public, or their maintenance is stopped after some years as in the case of <i>eLens</i> <a class="citation" href="pages/dev/analysis.html#cite-6">(6)</a>. To enable intuitive energy-aware programming, it is therefore important for developers to adopt and help maintain those tools. Furthermore, IDEs should integrate static or dynamic energy consumption analysis tools by collaborating with the researchers.
+            </p>
+
+            <footer>
+                <hr>
+
+                <h4>References</h4>
+
+                <cite id="cite-1">(1) Keijzers S. <i>Energy Consumption Analysis of Practical Programming Languages</i>. Master Thesis. Radboud University Nijmegen; 2014. Available from: <a href="https://www.ru.nl/publish/pages/769526/z_stein_keijzers_thesis_-_final.pdf">https://www.ru.nl/publish/pages/769526/z_stein_keijzers_thesis_-_final.pdf</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-2">(2) Vivek Kumar Singh, Kaushik Dutta, Debra VanderMeer. Estimating the Energy Consumption of Executing Software Processes. In: <i>2013 IEEE International Conference on Green Computing and Communications and IEEE Internet of Things and IEEE Cyber, Physical and Social Computing</i>. IEEE Computer Society. Beijing: IEEE; 2013. p. 94-101. Available from: <a href="https://doi.org/10.1109/GreenCom-iThings-CPSCom.2013.40">https://doi.org/10.1109/GreenCom-iThings-CPSCom.2013.40</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-3">(3) Shaiful Alam Chowdhury, Abram Hindle. GreenOracle: Estimating Software Energy Consumption with Energy Measurement Corpora. In: <i>Proceedings of the 13th International Conference on Mining Software Repositories</i>. Miryung Kim, Romain Robbes, Christian Bird (eds.) New York: ACM; 2016. p. 49-60. Available from: <a href="https://doi.org/10.1145/2901739.2901763">https://doi.org/10.1145/2901739.2901763</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-4">(4) Shuai Hao, Ding Li, William G. J. Halfond, Ramesh Govindan. Estimating mobile application energy consumption using program analysis. In: <i>Proceedings of the 2013 International Conference on Software Engineering</i>. David Notkin, Betty H. C. Cheng, Klaus Pohl (eds.) Piscataway: IEEE Press; 2013. p. 92-101. Available from: <a href="http://www-bcf.usc.edu/~halfond/papers/hao13icse.pdf">http://www-bcf.usc.edu/~halfond/papers/hao13icse.pdf</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-5">(5) Shuai Hao, Ding Li, William G. J. Halfond, Ramesh Govindan. Calculating Source Line Level Energy Information for Android Applications. In: <i>Proceedings of the 2013 International Symposium on Software Testing and Analysis</i>. Mauro Pezzè, Mark Harman (eds.) New York: ACM; 2015. p. 78-89. Available from: <a href="https://doi.org/10.1145/2483760.2483780">https://doi.org/10.1145/2483760.2483780</a> [Accessed: 5th March 2018]</cite>
+                <cite id="cite-6">(6) Momo Langenstein. Email sent to William G. J. Halfond. 4th February 2018</cite>
+
+                <h4>Code syntax highlighting</h4>
+
+                <cite>(7) Ivan Sagalaev. <i>highlight.js</i>. (Version 9.12.0) [Code]. Released under the BSD License. Available from: <a href="https://highlightjs.org/">https://highlightjs.org/</a> [Accessed: 5th March 2018]. 2017</cite>
+                <cite>(8) Pedro Oliveira. <i>androidstudio.css</i>. [Code]. Available from: <a href="https://github.com/isagalaev/highlight.js/blob/master/src/styles/androidstudio.css">https://github.com/isagalaev/highlight.js/blob/master/src/styles/androidstudio.css</a> [Accessed: 5th March 2018]. 2015</cite>
+            </footer>
+        </article>
+
+        <script src="slideMenu.js"></script>
+
+        <script>
+            hljs.initHighlighting();
+        </script>
+    </body>
+
+</html>

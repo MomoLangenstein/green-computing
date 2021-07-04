@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <title>Low-level Theory &middot; Theory &middot; Green Computing</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a class="active">Theory</a>
+                <ul style="list-style-type: none">
+                    <li>
+                        <a href="pages/theory/consumption.html">Energy Consumption</a>
+                    </li>
+                    <li>
+                        <a class="active">Low-level Theory</a>
+                    </li>
+                    <li>
+                        <a href="pages/theory/reversible-computations.html">Reversible computations</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a href="pages/nac/index.html">Networking</a>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+            <h1>Low-level Theory</h1>
+            <h2 class="pinline">
+                <span>Note</span>
+            </h2>
+            <p class="note">
+                In this article, we describe several established laws of computers' energy efficiency. Because these laws are based on hard
+                maths and theoretical physics, we are not going into much detail of
+                <b>why</b> these laws hold. If you want to learn more, all references to the cited articles are provided.
+            </p>
+            <hr>
+            <h2>
+                Landauer's principle
+            </h2>
+            <p>
+                This classical principle of energy spent on computations, proposed in 1961 by physicist and IBM engineer Rolf Landauer states
+                the following:
+            </p>
+            <blockquote>
+                <p>
+                    ...any logically irreversible manipulation of information, such as the erasure of a bit or the merging of two computation
+                    paths, must be accompanied by a corresponding entropy increase in non-information-bearing degrees of freedom
+                    of the information-processing apparatus or its environment.
+                </p>
+                <footer>
+                    <cite>
+                        <a href="https://arxiv.org/pdf/physics/0210005.pdf">Notes on Landauer’s Principle, Reversible Computation, and Maxwell’s Demon</a>
+                    </cite>, by Charles H. Bennett
+                    <a class="citation" href="pages/theory/low-level.html#cite-1">(1)</a>
+                </footer>
+            </blockquote>
+            <p>
+                The most confusing part of the quote, which is "entropy increase in non-information-bearing degrees of freedom" can be interpreted as "energy loss". "Merging of computational paths" refers to logic gates, which produce single output from several inputs, thus "merging" them. Hence, simplified to its extreme, Landauer's law means that energy wasting cannot be avoided while performing irreversible computations. It also entails that there is a
+                <b>minimum limit</b> of the amount of energy needed to perform an irreversible operation on one bit of information.
+                This limit is:
+                <a class="citation" href="pages/theory/low-level.html#cite-5">(5)</a>
+            </p>
+            <p>k &#215; T &#215; ln(2)</p>
+            <ul>
+                <li>k &mdash; Boltzmann constant (~ 1.38×10<sup>-23</sup> J/K)</li>
+                <li>T &mdash; temperature (Kelvin)</li>
+                <li>ln(2) &mdash; logarithm of 2</li>
+            </ul>
+            <p>
+                If the temperature is 20 (Celsius) degrees, the
+                <b> absolute maximum</b> possible bits of information that can be erased is approximately 3.57<sup>20</sup>.
+            </p>
+            <p>
+                At the time of writing the article, the most energy-efficient supercomputer in the world (stated by The Green 500) has the
+                efficiency of 17 Gigaflops per watt
+                <a class="citation" href="pages/theory/low-level.html#cite-2">(2)</a>. The term "Flops" refers to an operation on a floating point number, which takes some bits to compute. Also, we can assume that most of the computations it performs are irreversible. Making these assumptions,
+                the most energy-efficient supercomputer in the world in 2018 has the efficiency of roughly
+                <b>0.0001%</b> of theoretically possible maximum.
+            </p>
+            <h2>
+                Koomey's law
+            </h2>
+            <p>
+                Perhaps the most famous law in the world of computing is Moore's law, which states that the processing power of computers doubles every two years. Interestingly, there is a very similar law for energy consumption of computers, proposed by Stanford professor Jonathan Koomey in 2011. It states the following:
+            </p>
+            <blockquote>
+                <p>
+                    At a fixed computing load, the amount of battery you need will fall by a factor of two every year and a half.
+                </p>
+                <footer>
+                    <cite>
+                        Implications of Historical Trends in the Electrical Efficiency of Computing
+                    </cite>, by Jonathan Koomey; Stephen Berard; Marla Sanchez; Henry Wong
+                    <a class="citation" href="pages/theory/low-level.html#cite-3">(3)</a>
+                </footer>
+            </blockquote>
+            <p>
+                The law does not necessarily imply that the battery life of our devices has to double every 1.5 years. Rather, the performance of those devices can be increased while battery life remains the same. Koomey has backed his law by the following diagram, which shows that the number of computations per joule of energy dissipated has been doubling approximately every 1.57 years. As we can see from the diagram, this trend has been stable since the 1950s.
+            </p>
+
+            <figure>
+                <img src="pages/theory/theory/koomeys-law.jpg">
+                <figcaption>Fig. 1: Computations per kWh over time
+                    <a class="citation" href="pages/theory/low-level.html#cite-3">(3)</a>
+                </figcaption>
+            </figure>
+            <h2>Combining the Two</h2>
+            <p>
+                In his original 1961 paper, Landauer himself questioned the possibility of practically achieving the limit he proposed. However,
+                given the steady trend spotted by Koomey will continue, Landauer's limit will be reached by approximately 2050.
+                For comparison, Moore's law is predicted to no longer be applicable in the early 2020's
+                <a class="citation" href="pages/theory/low-level.html#cite-4">(4)</a>. The good thing about the result mentioned above is that we know for sure our current computers are so incredibly far
+                away from the ideal one that we should anticipate steady growth in energy-efficiency for at least 20&ndash;30
+                years. At the same time, if today's rapid rate of development continues, it is not that far enough until the date is reached. So what's next? Landauer's principle has been proven several times, including experimentally,
+                so we can be almost sure that it holds. Fortunately, there is an answer, and it is written in principle itself
+                &mdash; the Landauer's limit only applies to irreversible computations; hence it is possible to bypass it by
+                making them
+                <a href="pages/theory/reversible-computations.html">reversible</a>.
+            </p>
+
+            <p>
+
+            </p>
+
+            <h2>Margolus–Levitin theorem</h2>
+            <p>A more recent study, conducted by computer scientists from Boston University Norman Margolus and Lev Levitin in 1998
+                claims that there is an even more fundamental limit, described in terms of quantum theory rather than the theory
+                of thermodynamics. It applies to all forms of computation, i.e. not only irreversible ones. It is formulated
+                as follows:
+            </p>
+            <blockquote>
+                <p>
+                    ...adding one Joule of energy to a given computer can never increase its processing rate by more than about 3 × 10<sup>33</sup> operations
+                    per second.
+                </p>
+                <footer>
+                    <cite>
+                        <a href="https://arxiv.org/abs/quant-ph/9710043">The maximum speed of dynamical evolution</a>
+                    </cite>, by Norman Margolus; Lev B. Levitin;
+                </footer>
+            </blockquote>
+            <p>
+                This statement entails from the minimum bound for a quantum system to change the state, so it is perfectly distinguishable from its previous state. Here, the states of the system can be interpreted as the states of the memory, and rate of change of these states as processing power. Of course, the theorem mainly applies to quantum computers, but as quantum (subatomic) particles are the most fundamental bits of the universe that we know, this limit may be interpreted as the general bound on energy spent on computations.
+            </p>
+        <footer style="text-align: left; overflow-wrap: break-word;">
+            <hr>
+            <h4>References</h4>
+
+            <cite id="cite-1" class="reference">(1) Bennett CH. Notes on Landauer’s principle, reversible computation, and Maxwell’s Demon. Studies in History and Philosophy of Science Part B: Studies in History and Philosophy of Modern Physics. [Online] Elsevier BV; 2003;34(3): 501–510. Available from: <a href = "https://doi.org/10.1016/S1355-2198(03)00039-X">https://doi.org/10.1016/S1355-2198(03)00039-X</a> [Accessed 11th March 2018]</cite>
+            <cite id="cite-2" class="reference">(2) Green500.<i>Green500 List for November 2017</i>. 2017. Available from: <a href="https://www.top500.org/green500/lists/2017/11/">https://www.top500.org/green500/lists/2017/11/</a> [Accessed 5th March 2018]</cite>
+            <cite id="cite-3" class="reference">(3) Koomey J, Berard S, Sanchez M, Wong H. <i>Implications of Historical Trends in the Electrical Efficiency of Computing.</i> IEEE Annals of the History of Computing. [Online] Institute of Electrical and Electronics Engineers (IEEE); 2011;33(3): 46–54. Available from: <a href = "http://doi.ieeecomputersociety.org/10.1109/MAHC.2010.28"> http://doi.ieeecomputersociety.org/10.1109/MAHC.2010.28</a> [Accessed 11th March 2018]</cite>
+            <cite id="cite-4" class="reference">(4) The Economist.<i>After Moore's law</i>. 2016. Available from: <a href="https://www.economist.com/technology-quarterly/2016-03-12/after-moores-law">https://www.economist.com/technology-quarterly/2016-03-12/after-moores-law</a> [Accessed 5th March 2018]</cite>
+            <cite id="cite-5" class="reference">(5) Landauer R. Irreversibility and Heat Generation in the Computing Process. <i>IBM Journal of Research and Development.</i> [Online] IBM; 1961;5(3): 183–191. Available from: <a href = "https://doi.org/10.1147/rd.53.0183">https://doi.org/10.1147/rd.53.0183</a> [Accessed 11th March 2018]</cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+
+</body>
+
+</html>

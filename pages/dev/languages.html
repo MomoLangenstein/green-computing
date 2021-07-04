@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <base href="../../">
+        <link rel="stylesheet" type="text/css" href="menuStyle.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+
+        <link rel="stylesheet" type="text/css" href="pages/dev/languages/languages.css">
+
+        <link rel="stylesheet" type="text/css" href="pages/dev/common/androidstudio.css">
+
+        <title>Language Efficiency &middot; Software Development &middot; Green Computing</title>
+    </head>
+
+    <body>
+        <!--[if lte IE 8]><SCRIPT src='excanvas.js'></script><![endif]-->
+        <script src="pages/dev/languages/Chart.min.js"></script>
+
+        <script src="pages/dev/common/highlight.pack.js"></script>
+
+        <nav id="menu">
+            <ul class="sidenav">
+                <li>
+                    <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+                </li>
+                <hr style="border-style: solid; color: var(--main)">
+                <li>
+                    <a href="index.html#menu">Home</a>
+                </li>
+                <li>
+                    <a href="pages/theory/consumption.html">Theory</a>
+                </li>
+                <li>
+                    <a class="active">Software Development</a>
+                    <ul style="list-style-type: none; padding-left: 0">
+                        <li style="padding-left: 1em">
+                            <a href="pages/dev/index.html">Introduction</a>
+                        </li>
+                        <li style="padding-left: 1em">
+                            <a href="pages/dev/analysis.html">Energy Estimates</a>
+                        </li>
+                        <li style="padding-left: 1em">
+                            <a id="artlOption" class="active" style="cursor: pointer" onclick="zoomOut()">Language Efficiency</a>
+                        </li>
+                        <li style="padding-left: 0">
+                            <a id="toolOption" style="padding-left: 2em; cursor: pointer" onclick="zoomIn()">Language Comparison Tool</a>
+                            <ul id="benchmark" style="list-style-type: none; padding-left: 2em; background-color: rgb(65, 191, 175)" hidden></ul>
+                        </li>
+                        <li style="padding-left: 1em">
+                            <a href="pages/dev/android.html">Android&trade; Architecture</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="pages/ppm/acpi.html">Power Management</a>
+                </li>
+                <li>
+                    <a href="pages/nac/index.html">Networking</a>
+                </li>
+                <li>
+                    <a href="pages/development-tips.html">Practical Tips</a>
+                </li>
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+            <i></i>
+        </div>
+
+        <article id="tool" hidden>
+            <header>
+                <h1 style="margin-bottom: 0.67em">
+                    Language Comparison Tool
+
+                    <span style="float:right; width: 0.75em; height: 0.75em; cursor: pointer" onclick="zoomOut(true)">
+                        <img src="pages/dev/languages/zoom-out.svg" height="100%" width="100%">
+                    </span>
+                </h1>
+            </header>
+
+            <div id="chzrt" class="chart" style="height: 100vmin; clear: both"></div>
+
+            <span style="width: auto; float: left; padding: 8px 0px; font-family: sans-serif">
+                <span style="font-weight: bold">Languages</span>
+                ( <span style="border-width: 2px; font-size: 14px" class="cmp">Compiled</span> <span style="border-width: 2px; font-size: 14px" class="vim">VM</span> <span style="border-width: 2px; font-size: 14px" class="itp">Interpreted</span> ):
+            </span>
+            <span id="sdev" class="checked" style="width: auto; float: right; font-family: sans-serif" onClick="sdevClick()">Standard deviation</span>
+
+            <br>
+            <div id="comparison" style="display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; font-size: 14px; font-weight: bold; justify-content: center"></div>
+            <br>
+
+            <pre style="width: calc(80ch + 3em); max-width: 100%; margin: auto; font-size: calc(5px + 0.5vw); line-height: 1.2; position: relative"><div id="codeLang" style="position: absolute; top: 1em; right: 2em; color: #ffc66d; font-family: sans-serif; font-size: 14; font-weight: bold"></div><code id="code" style="height: 30em"></code></pre>
+
+            <br>
+
+            <footer>
+                <hr>
+
+                <h4>Benchmark results and implementations</h4>
+
+                <cite>(1) Rui Pereira et al. <i>Results</i>. Available from: <a href="https://sites.google.com/view/energy-efficiency-languages/results">https://sites.google.com/view/energy-efficiency-languages/results</a> [Accessed: 6th March 2018]</cite>
+
+                <cite>(2) Rui Pereira. et al. <i>Energy Efficiency in Programming Languages</i>. [Code]. Available from: <a href="https://github.com/greensoftwarelab/Energy-Languages">https://github.com/greensoftwarelab/Energy-Languages</a> [Accessed: 6th March 2018]. 2018</cite>
+
+                <h4>Interactive graph</h4>
+
+                <cite>(3) Chart.js Contributers. <i>Chart.js</i>. (Version 2.7.1) [Code]. Release under the MIT license. Available from: <a href="https://github.com/chartjs/Chart.js">https://github.com/chartjs/Chart.js</a> [Accessed: 6th March 2018]. 2017</cite>
+                <cite>(4) Tom Loudon. <i>Patternomaly</i>. (Version 1.3.0) [Code]. Released under the MIT license. Available from: <a href="https://github.com/ashiguruma/patternomaly">https://github.com/ashiguruma/patternomaly</a> [Accessed: 6th March 2018]. 2016</cite>
+                <cite>(5) RisingStack. <i>Writing a JavaScript framework - Sandboxed Code Evaluation</i>. [Code]. Released under the MIT license. Available from: <a href="https://github.com/nx-js/compiler-util">https://github.com/nx-js/compiler-util</a> [Accessed: 6th March 2018]. 2017</cite>
+                <cite>(6) Google. <i>ExplorerCanvas</i>. [Code]. Released under the Apache-2.0 License. Available from: <a href="https://github.com/arv/ExplorerCanvas">https://github.com/arv/ExplorerCanvas</a> [Accessed: 6th March 2018]. 2015</cite>
+                <cite>(7) NewOCR.com . <i>Free online OCR</i>. [Software]. Available from: <a href="http://www.newocr.com/">http://www.newocr.com/</a> [Accessed: 6th March 2018]. 2018</cite>
+                <cite>(8)  James Larkin. <i>Standard Deviations</i>. Available from: <a href="https://www.larkinweb.co.uk/science/standard_deviations.html">https://www.larkinweb.co.uk/science/standard_deviations.html</a> [Accessed: 6th March 2018]</cite>
+
+                <h4>Code syntax highlighting</h4>
+
+                <cite>(9) Ivan Sagalaev. <i>highlight.js</i>. (Version 9.12.0) [Code]. Released under the BSD License. Available from: <a href="https://highlightjs.org/">https://highlightjs.org/</a> [Accessed: 5th March 2018]. 2017</cite>
+                <cite>(10) Pedro Oliveira. <i>androidstudio.css</i>. [Code]. Available from: <a href="https://github.com/isagalaev/highlight.js/blob/master/src/styles/androidstudio.css">https://github.com/isagalaev/highlight.js/blob/master/src/styles/androidstudio.css</a> [Accessed: 5th March 2018]. 2015</cite>
+                <cite>(11) Patrick Gillespie. <i>Text to ASCII Art Generator</i>. [Software]. Available from: <a href="http://patorjk.com/software/taag/">http://patorjk.com/software/taag/</a> [Accessed: 5th March 2018]</cite>
+
+                <h4>Zoom icons</h4>
+
+                <cite>(12) Dave Gandy. <i>Zoom in free icon</i>. Released under the Creative Commons 3.0 Unported License. Available from: <a href="https://www.flaticon.com/free-icon/zoom-in_25277">https://www.flaticon.com/free-icon/zoom-in_25277</a> [Accessed: 5th March 2018]</cite>
+                <cite>(13) Dave Gandy. <i>Zoom out free icon</i>. Released under the Creative Commons 3.0 Unported License. Available from: <a href="https://www.flaticon.com/free-icon/zoom-out_25335">https://www.flaticon.com/free-icon/zoom-out_25335</a> [Accessed: 5th March 2018]</cite>
+            </footer>
+        </article>
+
+        <article id="article">
+            <header>
+                <h1>Energy Efficiency of Programming Languages</h1>
+            </header>
+
+            <p>
+                The concept of programming languages predates electrical computational machines. Paper tapes and punch cards were first used in mechanical weaving machines such as the Jacquard Machine to describe instructions for patterns during the Industrial Revolution <a class="citation" href="pages/dev/languages.html#cite-1">(1)</a>. This principle was, therefore, also applied to reading in code on the first computers, as paper holes lend themselves well to the binary encoding of information. The first abstract programming language "Plankalkül" was designed on paper by Konrad Zuse in the 1940s, who independently created the first general purpose computers during World War II, and was on around a one-bit primitive type (on / off) with support for several modern elements such as loops, conditional statements, subroutines, exceptions and objects <a class="citation" href="pages/dev/languages.html#cite-2">(2)</a>. The first functional language to feature a compiler was Fortran, which is still used today for performance comparisons.
+            </p>
+
+            <h2>Language execution models</h2>
+
+            <p>
+                While all programming languages are used to describe instructions for a computer to execute, there are two important properties, which allow grouping them. The first one distinguished different execution models, which define when and how the programmers' source code is translated into machine code:
+            </p>
+
+            <p>
+                <b>Compiled</b> languages come with a separate program, the compiler. It is used to transform the source code into more abstract representations first, and then to generate hardware specific machine code. Compilers have the advantage that they can perform static optimisations to the code and use platform specific improvements. Furthermore, the amount of time needed for them to run does not have any impact on the consumers of software, as the only the compiled executables are distributed. However, this also implies that the program needs to be compiled for each platform individually.
+            </p>
+
+            <p>
+                <b>Virtual machines</b> solve this problem by introducing an additional layer of abstraction. The source code is compiled into an intermediate form, the bytecode, which is a language-specific format that is similar to machine code but resides on a higher level. The consumers of the software have to install an additional virtual machine, which converts the bytecode into the platform-specific machine code at runtime, which creates a performance overhead for the user. If the format is standardised, a program only needs to be written once before being able to run on any platform with the virtual machine.
+            </p>
+
+            <p>
+                <b>Interpreted</b> languages are an extension of virtual machines. Instead of using an intermediate bytecode format, they often directly translate the source code into machine instructions at runtime. This approach is the most dynamic and allows for example for code modification during the execution of the code. However, it is also the most resource consuming in most use cases, as all translation work has to be processed at the same time as the actual program. Furthermore, significantly fewer static optimisations can be made, because the runtime often does not know about the entire code yet.
+            </p>
+
+            <h2>Language paradigms</h2>
+
+            <p>
+                The second characteristic are the paradigms the language makes use of, which fundamentally define what effect code can have one the state of the computer as well as how the control flow is structured. Four key paradigms are:
+            </p>
+
+            <p>
+                <b>Functional</b> programming does not allow procedures to have any side effects and is very similar to the notion of mathematical functions. During their execution, procedures are not allowed to modify any variables but only to read existing and create new ones. Functional programming is often more formal and precise, as the effect of code is easier to reason about. However, critical parts of programs like user interaction or file input/output are far more difficult to model.
+            </p>
+
+            <p>
+                <b>Imperative</b> programming languages are the exact opposite of functional ones, as their main feature are the side effects code can have. They are mostly more efficient because information in memory can simply be modified instead of having to create altered copies of everything. Imperative languages also can give direct access to low-level features like the memory, as computers themselves operate imperatively. Still, the possibilities of data modifications from outside provide extra challenges in the verification of their code and make them less safe.
+            </p>
+
+            <p>
+                <b>Object oriented</b> programming tries to model problems similar to reality by grouping code together based on the data they modify. It thereby provides an intuitive way to model real problems by encapsulating procedures and attributes into objects, which can then interact with one another in pre-defined manners. The object-oriented approach can greatly reduce redundancy in the code. Furthermore, it can be used to define permissions on which part of a program is allowed to alter a certain part of its state. Thereby it increased the safety for example of imperative code, with which it is often combined.
+            </p>
+
+            <p>
+                <b>Scripting</b> languages are often used to execute a sequence of simple instructions dynamically. They are mostly used to bind together other programs or procedures into a more complex application. Therefore, scripts are often written in a domain-specific or embedded language that is interpreted on a line-by-line basis. As they originate from control languages used to automate common tasks for example in programming, they can be classified as higher-level languages, whose performance is often bound by the programs they call.
+            </p>
+
+            <h2>The Computer Language Benchmarks Game</h2>
+
+            <p>
+                "The Computer Language Benchmarks Game" <a class="citation" href="pages/dev/languages.html#cite-3">(3)</a> is an online software project that compares the performance of 27 programming languages in 13 toy benchmarks. It tries to enable comparisons based on the execution time, memory usage, file size and CPU load by having an open competition in which everyone can submit their implementation for one of the tests. However, all benchmarks also strictly define how the algorithms may be implemented, which makes side-by-side comparison easier but also disallows certain language specific optimisations to be used. Furthermore, due to the simplicity of the tests, the achieved performance cannot stand for the actual efficiency of large applications. Still, they provide an easy way to see differences in implementations of the same problems and different languages. Because of a large number of contributions and frequent updates of the scores, the project has also become a source for very optimised code in the respective languages.
+            </p>
+
+            <h2>RAPL</h2>
+
+            <p>
+                The <b>R</b>unning <b>A</b>verage <b>P</b>ower <b>L</b>imit interface <a class="citation" href="pages/dev/languages.html#cite-4">(4)</a> has been supported on Intel processors starting with the Sandy Bridge microarchitecture released in 2011 <a class="citation" href="pages/dev/languages.html#cite-5">(5)</a>. One of its functionalities allows reading an internal counter register, which holds the number of fractions of a Joule that have approximately been consumed since its last reset. It has been used to implement several power monitoring tools on Linux <a class="citation" href="pages/dev/languages.html#cite-6">(6)</a>. Furthermore, the high accuracy of its fine-grained estimates has also made it a popular meter in research about the energy efficiency of programs. Implementations working with C and Java have also made it possible to measure the performance of any piece of code either written in those languages or executed in a program invoked by them <a class="citation" href="pages/dev/languages.html#cite-7">(7: p. 258)</a>.
+            </p>
+
+            <h2>"Energy Efficiency across Programming Languages"</h2>
+
+            <p>
+                Seven researchers from the University of Minho, the Nova University of Lisbon and the University of Coimbra published the paper "Energy Efficiency across Programming Languages - How Do Energy, Time and Memory Relate?" in 2017 <a class="citation" href="pages/dev/languages.html#cite-7">(7)</a>. They used ten benchmarks from The Computer Language Benchmark Game as well as the RAPL interface to measure the performance of 27 programming languages of different execution models and paradigms regarding the execution time, the peak memory usage as well as the energy consumption of both the CPU and DRAM. As energy is calculated as
+                <span style="display: block; text-align: center">E<sub>nergy</sub> = T<sub>ime</sub> × P<sub>ower</sub></span>
+                one of the most significant questions they asked was whether increasing energy efficiency could be reduced to only making programs run faster or use less memory. The setup of their tests including the used hardware and, e.g. compiler versions can be found on their <a href="https://sites.google.com/view/energy-efficiency-languages">website</a>.
+            </p>
+
+            <p>
+                In the coming paragraphs, only graphs showing the key findings of the paper can be found. As the researchers published their entire testing data <a class="citation" href="pages/dev/languages.html#cite-8">(8)</a>, however, this website also provides the opportunity to visually <b>explore the data set in its entirety</b>. On the right hand side of each graph title, there is a <span style="display: inline-block; width: 1em; height: 1em"><img src="pages/dev/languages/zoom-in.svg" width="100%" height="100%"></span> symbol. By clicking or tapping on it, the language comparison tool will be opened mode using that diagram as a starting point. With the tool, the benchmark, as well as the languages and measurements, can be selected. Additionally, the code of how the particular algorithm was implemented in a language can also be shown. This visualisation is an intuitive way to compare the 27 languages in 10 benchmarks using four atomic and twelve derived measurements based on individual project constraints or preferences. More information about the individual benchmarks can be found on the website of <a href="https://benchmarksgame.alioth.debian.org/u64q/nbody-description.html">The Computer Language Benchmarks Game</a>.
+            </p>
+
+            <h2>Energy consumption and execution time</h2>
+
+            <p>
+                A first approach to answer this question is to look at five of the most used programming languages and compare the total energy consumption with the execution time:
+            </p>
+
+            <div id="ch0rt" class="chart">
+                <div id="activeChartContainer" style="height: 100%" hidden>
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+
+            <p>
+                This example would suggest, that the direct proportionality of E<sub>nergy</sub> = T<sub>ime</sub> × P<sub>ower</sub> holds in reality as well, even if the power is unknown. However, if one looks at the ratio in the <i>Regex Redux</i> benchmark, larger variance between the same languages can be seen:
+            </p>
+
+            <div id="ch1rt" class="chart">
+                <div id="inactiveChartContainer" style="height: 100%" hidden>
+                    <img id="place" height="100%">
+                </div>
+            </div>
+
+            <p>
+                This phenomenon can be further stressed by observing the results of the <i>Binary Trees</i> benchmark. Even though Pascal consumes roughly 10% less energy, it still takes about twice as much execution time as Chapel <a class="citation" href="pages/dev/languages.html#cite-7">(7: p. 260)</a>:
+            </p>
+
+            <div id="ch2rt" class="chart"></div>
+
+            <p>
+                A second approach is to compare all energy-time ratios of one benchmark. In the <i>N-Body</i> test it can be seen that most data points lie between 10W and 15W with only JRuby and Lua standing out as exceptions. It can, therefore, be concluded that while generally, the direct proportionality between energy and time holds, this still depends on the benchmark, i.e. the type of algorithm that needs to be performed:
+            </p>
+
+            <div id="ch3rt" class="chart"></div>
+
+            <p>
+                Another way to look at the data is to separate between the compiled (C and C++), visual machine (F# and Java) and interpreted languages (Python and Ruby). While Java almost matches the performance of C and C++, there still is a progression between the execution types. Indeed, on average compiled languages consumed 120J in 5103ms, virtual machines 576J in 20623ms and interpreted languages 2365J in 87614ms execution time <a class="citation" href="pages/dev/languages.html#cite-7">(p. 261)</a>.
+            </p>
+
+            <div id="ch4rt" class="chart"></div>
+
+            <p>
+                The paradigms of the programming languages also significantly affect the resulting performance. On average, imperative languages (Ada, C, F#) consumed 125J in 5585ms, object-oriented (Ada, F#, Python) consumed 879J in 32965ms, functional (Erlang, F#) consumed 1367J in 42740ms and scripting languages took 2320J in 88322ms execution time <a class="citation" href="pages/dev/languages.html#cite-7">(p. 261)</a>:
+            </p>
+
+            <div id="ch5rt" class="chart"></div>
+
+            <h2>Energy consumption and memory usage</h2>
+
+            <p>
+                The second interesting relationship is between the peak memory usage and the energy consumption. One typical tradeoff for performance is to cache precomputed values or use more memory expensive but faster algorithms instead. A starting point is to look at the languages with the most and least amount of memory usage:
+            </p>
+
+            <div id="ch6rt" class="chart"></div>
+
+            <p>
+                It can be seen that the five best-performing languages C, C++, Fortran, Go and Pascal are all compiled and imperative. Dart, Erlang, JRuby, Lua and Perl are interpreted and scripting languages with Erlang being an exception. It can also be observed that while the three best languages seem to have similar energy to memory ratio, this is not true for example for Lua. Therefore, the next graph compares this ratio for almost all languages in the <i>Spectral Norm</i> benchmark. Note that Lua, Perl, PHP, Python and Ruby are excluded, as they distort the chart because of their high ratios:
+            </p>
+
+            <div id="ch7rt" class="chart"></div>
+
+            <p>
+                The high variations between the languages are observable. It can be proven that there is almost no correlation between the DRAM energy consumption and the memory usage. However, the different paradigms of languages can still affect the ratio between the amount of energy necessary for the CPU and DRAM. While the dynamic random-access memory uses between five and ten percent on average, the languages that negatively stand out are all feature scripting:
+            </p>
+
+            <div id="ch8rt" class="chart"></div>
+
+            <h2>Conclusion</h2>
+
+            <p>
+                The choice of the programming language can have a significant impact on the energy efficiency of the resulting program. While compiled, imperative code has the best performance on average, very well optimised virtual machines like the Java JVM still present a viable alternative. However, interpreted scripting languages perform worse in most use cases, even though the actual difference depends on the benchmark. Memory intensive implementations do not proportionally increase the energy consumption. Therefore, precomputing certain values is a good way to increase both the speed and energy efficiency of a program. Lastly, while faster programs do not consume less energy in general, the most efficient languages still perform the best in both areas because of their extensive optimisations.
+            </p>
+
+            <p>
+                Using the data collected from all benchmarks a normalised rating can be calculated for energy, time and memory <a class="citation" href="pages/dev/languages.html#cite-7">(p. 263)</a>. It is based on the respective language with the best performance, which is C for the first two measures and Pascal for the last one. The last graph shows the energy-related rating of all languages. As with all diagrams in this article, clicking or tapping on the <span style="display: inline-block; width: 1em; height: 1em"><img src="pages/dev/languages/zoom-in.svg" width="100%" height="100%"></span> symbol to the right of the title allows access to all datasets in the interactive graph mode. While testing the energy efficiency of multiple languages for a specific problem remains the most accurate way to find the most performant choice, this article can serve as an important tool to explore and narrow the scope in advance.
+            </p>
+
+            <div id="ch9rt" class="chart"></div>
+
+            <footer>
+                <hr>
+
+                <h4>References</h4>
+
+                <cite id="cite-1">(1) Janis Rozentals. <i>Weaving history</i>. Available from: <a href="http://www.weavedesign.eu/weaving-history/">http://www.weavedesign.eu/weaving-history/</a> [Access: 6th March 2018]</cite>
+                <cite id="cite-2">(2) F. L. Bauer, H. Wössner. The "Plankalkül" of Konrad Zuse: A Forerunner of Today's Programming Languages. In: <i>Communications of the ACM</i>. 1972; 15 (7). Available from: <a href="http://www.catb.org/retro/plankalkuel/">http://www.catb.org/retro/plankalkuel/</a> [Accessed: 6th March 2018]. 1972</cite>
+                <cite id="cite-3">(3) Isaac Gouy. <i>The Computer Language Benchmarks Game</i>. Available from: <a href="https://benchmarksgame.alioth.debian.org/">https://benchmarksgame.alioth.debian.org/</a> [Accessed: 6th March 2018]</cite>
+                <cite id="cite-4">(4) Intel. PLATFORM SPECIFIC POWER MANAGEMENT SUPPORT. <i>Intel&copy; 64 and IA-32 Architectures Software Developer’s Manual</i>. 2016; 3: p. 499-507. Available from: <a href="https://www.intel.co.uk/content/www/uk/en/architecture-and-technology/64-ia-32-architectures-software-developer-system-programming-manual-325384.html">https://www.intel.co.uk/content/www/uk/en/architecture-and-technology/64-ia-32-architectures-software-developer-system-programming-manual-325384.html</a> [Accessed: 6th March 2018]</cite>
+                <cite id="cite-5">(5) Vince Weaver. <i>Linux support for Power Measurement Interfaces</i>. Available from: <a href="http://web.eece.maine.edu/~vweaver/projects/rapl/rapl_support.html">http://web.eece.maine.edu/~vweaver/projects/rapl/rapl_support.html</a> [Accessed: 6th March 2018]</cite>
+                <cite id="cite-6">(6) Vince Weaver. <i>Reading RAPL energy measurements from Linux</i>. Available from: <a href="http://web.eece.maine.edu/~vweaver/projects/rapl/index.html">http://web.eece.maine.edu/~vweaver/projects/rapl/index.html</a> [Accessed: 6th March 2018]</cite>
+                <cite id="cite-7">(7) Rui Pereira et al. Energy efficiency across programming languages: how do energy, time, and memory relate? . In: <i>Proceedings of the 10th ACM SIGPLAN International Conference on Software Language Engineering</i>. Benoit Combemale, Marjan Mernik, Bernhard Rumpe (eds.) New York: ACM; 2017. p. 256-267. Available from: <a href="https://doi.org/10.1145/3136014.3136031">https://doi.org/10.1145/3136014.3136031</a> [Accessed: 6th March 2018]</cite>
+
+                <h4>Benchmark results and implementations</h4>
+
+                <cite id="cite-8">(8) Rui Pereira et al. <i>Results</i>. Available from: <a href="https://sites.google.com/view/energy-efficiency-languages/results">https://sites.google.com/view/energy-efficiency-languages/results</a> [Accessed: 6th March 2018]</cite>
+
+                <cite>(9) Rui Pereira. et al. <i>Energy Efficiency in Programming Languages</i>. [Code]. Available from: <a href="https://github.com/greensoftwarelab/Energy-Languages">https://github.com/greensoftwarelab/Energy-Languages</a> [Accessed: 6th March 2018]. 2018</cite>
+
+                <h4>Interactive graph</h4>
+
+                <cite>(10) Chart.js Contributers. <i>Chart.js</i>. (Version 2.7.1) [Code]. Release under the MIT license. Available from: <a href="https://github.com/chartjs/Chart.js">https://github.com/chartjs/Chart.js</a> [Accessed: 6th March 2018]. 2017</cite>
+                <cite>(11) Tom Loudon. <i>Patternomaly</i>. (Version 1.3.0) [Code]. Released under the MIT license. Available from: <a href="https://github.com/ashiguruma/patternomaly">https://github.com/ashiguruma/patternomaly</a> [Accessed: 6th March 2018]. 2016</cite>
+                <cite>(12) RisingStack. <i>Writing a JavaScript framework - Sandboxed Code Evaluation</i>. [Code]. Released under the MIT license. Available from: <a href="https://github.com/nx-js/compiler-util">https://github.com/nx-js/compiler-util</a> [Accessed: 6th March 2018]. 2017</cite>
+                <cite>(13) Google. <i>ExplorerCanvas</i>. [Code]. Released under the Apache-2.0 License. Available from: <a href="https://github.com/arv/ExplorerCanvas">https://github.com/arv/ExplorerCanvas</a> [Accessed: 6th March 2018]. 2015</cite>
+                <cite>(14) NewOCR.com . <i>Free online OCR</i>. [Software]. Available from: <a href="http://www.newocr.com/">http://www.newocr.com/</a> [Accessed: 6th March 2018]. 2018</cite>
+                <cite>(15)  James Larkin. <i>Standard Deviations</i>. Available from: <a href="https://www.larkinweb.co.uk/science/standard_deviations.html">https://www.larkinweb.co.uk/science/standard_deviations.html</a> [Accessed: 6th March 2018]</cite>
+
+                <h4>Zoom icons</h4>
+
+                <cite>(16) Dave Gandy. <i>Zoom in free icon</i>. Released under the Creative Commons 3.0 Unported License. Available from: <a href="https://www.flaticon.com/free-icon/zoom-in_25277">https://www.flaticon.com/free-icon/zoom-in_25277</a> [Accessed: 5th March 2018]</cite>
+                <cite>(17) Dave Gandy. <i>Zoom out free icon</i>. Released under the Creative Commons 3.0 Unported License. Available from: <a href="https://www.flaticon.com/free-icon/zoom-out_25335">https://www.flaticon.com/free-icon/zoom-out_25335</a> [Accessed: 5th March 2018]</cite>
+            </footer>
+        </article>
+
+        <script src="slideMenu.js"></script>
+
+        <script src="pages/dev/languages/languages.js"></script>
+    </body>
+
+</html>

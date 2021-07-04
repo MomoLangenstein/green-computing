@@ -1,0 +1,92 @@
+.lang {
+    padding-left: 1em;
+    background-color: var(--light);
+    color: var(--light-main);
+    padding: 8px 16px;
+    margin: 4px;
+    border-width: 2px;
+    cursor: pointer;
+}
+
+.lang.selected {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.lang.disabled {
+    background-color: var(--white);
+    color: var(--light);
+    cursor: default;
+}
+
+.lang:hover:not(.disabled):not(.selected) {
+    background-color: var(--light-main);
+    color: var(--light);
+}
+
+span.cmp {
+    border-style: solid;
+}
+
+span.vim {
+    border-style: dashed;
+}
+
+span.itp {
+    border-style: dotted;
+}
+
+#sdev {
+    background-color: var(--light);
+    color: var(--light-main);
+    padding: 8px 16px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+#sdev.checked {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+#sdev:hover:not(.checked) {
+    background-color: var(--light-main);
+    color: var(--light);
+}
+
+article {
+    width: 95%;
+}
+
+article > * {
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+article > p {
+    clear: both;
+}
+
+@media screen and (max-width: 800px) {
+    article > * {
+        width: 45vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    article > * {
+        width: 90vw;
+    }
+}
+
+.chart {
+    display: block;
+    clear: both;
+    height: calc(100vmin - 5em);
+    width: auto;
+}
+
+img {
+    width: auto;
+}

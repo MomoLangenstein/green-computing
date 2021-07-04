@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Reversible Computations &middot; Theory &middot; Green Computing</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a class="active">Theory</a>
+                <ul style="list-style-type: none">
+                    <li>
+                        <a href="pages/theory/consumption.html">Energy Consumption</a>
+                    </li>
+                    <li>
+                        <a href="pages/theory/low-level.html">Low-level Theory</a>
+                    </li>
+                    <li>
+                        <a class="active">Reversible computations</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a href="pages/nac/index.html">Networking</a>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+        <h1>Reversible Computations</h1>
+        <p>
+                Since Landauer's principle only applies to irreversible computations, the obvious way to bypass it is by making the computations reversible. Reversible computation is such a computation that no information is destroyed during its execution.
+                It means that, given the outputs of a function, its inputs can be unambiguously deduced. However, is it possible to compute everything reversibly?
+            </p>
+            <p>
+                Turing machine is the simplest mathematical model of a machine which is capable of performing any given algorithm. Its main
+                components are a tape of infinite length, which serves as the memory, and a read/write head which performs operations
+                on the tape. The original Turing machine is irreversible because the head can overwrite a cell. To make sure
+                that any computations can be performed reversibly, a reversible Turing machine was devised by an
+                IBM engineer called Charles Bennett in 1973
+                <a class="citation" href="pages/theory/reversible-computations.html#cite-1">(1)</a>.
+            </p>
+            <h2 class="pinline">
+                <span>Note</span>
+            </h2>
+            <p class="note">
+                Even though a reversible computer may, in theory, consume no energy, it is not possible in practice. Firstly, because of
+                inevitable resistance in electrical circuits, and secondly because of other parts of a computer (such as a screen
+                or a hard drive) cannot operate without consuming energy.
+            </p>
+            <hr>
+            <h2>
+                Why does it work?
+            </h2>
+            <p>
+                The claim that reversible computations imply energy-efficiency relies on some fundamental principles of physics. A closed physical system (one in which total energy is constant) is reversible. If you let the two objects collide in
+                ideal situation (no energy loss due to friction, no air, etc.), then if you know their current positions, velocities
+                and other information about both objects at an arbitrary point in time, you can deduce their positions at ANY
+                point in time, both in the future and in the past; hence, the system is reversible. If we introduce friction or other energy losses, at least one of the objects will eventually stop, and we cannot deduce the properties of it in the past once it is not moving. We can state that information about velocities of the objects has turned into information about temperature. If we only care about the velocities, we can state that information has been
+                "lost" as heat. Moreover, that is exactly what's happening when bits of information are erased. The total information in the physical system (the universe in this case) remains constant, but it gets converted from a useful bit of information to heat. Therefore, the only way to bypass this fundamental limit is by avoiding the destruction of information by making the computational system reversible.
+            </p>
+            <h2>Implementation</h2>
+            <p>
+                Implementing hardware and software, that would support efficient reversible computing is a current area of active research.
+                Why can't we use inefficient reversible computing now to preserve battery life? Because "inefficient"
+                in this case, means "practically impossible". The reversibility problem by itself can be solved quite easily —
+                to preserve information, we can simply store it somewhere instead of destroying. However, we would obviously need an infinite amount of memory to do this.
+            </p>
+            <h3>Logic gates</h3>
+            <p>
+                The first problem to achieve the reversibility is the logic gates. The only "basic" logic gate which is reversible is a NOT
+                gate. If the output is one, we can unambiguously deduce that the input was zero and vice versa. We can also deduce
+                inputs of an AND gate producing output 1 (both inputs were 1) and OR gate producing output 0 (both inputs were
+                0); however, it is not always the case. Hence, these gates are not reversible. However, logical AND and OR operations are fundamental for computations, and we need to use them. Unfortunately, the only way we can do it is by preserving
+                some (or all) of the inputs <a class="citation" href="pages/theory/reversible-computations.html#cite-3">(3)</a>. Because of that, reversible computations cannot be as efficient as irreversible ones, both regarding speed and memory usage.
+            </p>
+
+            <h3>Software</h3>
+
+            <p>
+                Even if the hardware supports reversibility, the software must also be altered to support it. For example, a classical problem of garbage collection (deciding, which parts of memory are unused and making them free) is quite tricky to be implemented reversibly, since the information cannot be destroyed. It can be solved using the reversibility principle
+                itself &mdash; if we have the outputs stored, we can simply run the computations used to obtain them in reverse
+                and get the inputs back
+                <a class="citation" href="pages/theory/reversible-computations.html#cite-2">(2)</a>. Again, it is quite inefficient regarding performance compared to irreversible approach. All classical algorithms, such as sorting, hashing and even iterating has to be approached differently to allow for reversibility as well.
+            </p>
+
+            <h2>Future prospects</h2>
+            <p>
+                As we can see, a completely reversible computing machine requires a rethinking of most of its simplest elements. Many problems of computer science, which were solved long ago, have to be solved "again", which makes reversible computing such an exciting area of research. Although some progress has already been made (reversible Turing machine,
+                logic gates, some basic algorithms etc.) there are still numerous problems to be solved. Reversible algorithms often require time and memory overheads, and reducing them is also quite a significant and challenging problem.
+                Perhaps the most realistic area of research is making an almost-reversible computer, which allows balancing between energy efficiency and time-memory efficiency.
+            </p>
+        <footer>
+            <hr>
+            <h4>References</h4>
+            <cite id="cite-1" class="reference">(1) Christopher H. Bennett. <i>Logical Reversibility of Computation</i>. IBM Journal of Research and Development. [Online] IBM; 1973;17(6): 525–532. Available from: <a href = "https://doi.org/10.1147/rd.176.0525">https://doi.org/10.1147/rd.176.0525</a> [Accessed 11th March 2018]</cite>
+
+            <cite id="cite-2" class="reference">(2) Erik D. Demaine, Jayson Lynch, Geronimo J. Mirano, Nirvan Tyagi. <i>Energy-Efficient Algorithms.</i> Proceedings of the 2016 ACM Conference on Innovations in Theoretical Computer Science - ITCS ’16. [Online] ACM Press; 2016. Available from: <a href = "https://doi.org/10.1145/2840728.2840756"> https://doi.org/10.1145/2840728.2840756</a> [Accessed 11th March 2018]</cite>
+
+            <cite id="cite-3" class="reference">(3) Toffoli T. <i>Reversible computing.</i> Automata, Languages and Programming. [Online] Springer Berlin Heidelberg; 1980. p. 632–644. Available from: <a href = "http://dx.doi.org/10.1007/3-540-10003-2_104">http://dx.doi.org/10.1007/3-540-10003-2_104</a> [Accessed 11th March 2018]</cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

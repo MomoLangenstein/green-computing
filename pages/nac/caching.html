@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Caching &middot; Networking &middot; Green Computing</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a class="active">Networking</a>
+                <ul style="list-style-type: none;">
+                    <li>
+                        <a href="pages/nac/index.html">Introduction</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/reducing.html">Demand Reduction</a>
+                    </li>
+                    <li>
+                        <a class="active" href="pages/nac/caching.html">Caching</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/improving.html">Improving Network Protocols</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+
+        <header>
+            <h1 style="margin-bottom: 0px">Caching</h1>
+            <span style="font-size: 1.3em; color: grey">Investigating the effect of new caching techniques on energy usage of mobile devices.</span>
+        </header>
+
+        <p>
+            Caching involves saving previously downloaded resources into local storage on a device, so that it can be referred to later if required by subsequent access of the same data, provided that it has not changed in the meantime. Caching is important in saving energy, as it can prevent network activity when accessing data previously required before. Caching has different effectiveness at the various levels between the raw IP stream and the objects in the memory of apps. We will consider HTTP caching at both the app and operating system level, as well as delta encoding of data.
+        </p>
+
+        <h2>HTTP Caching</h2>
+
+        <p>
+            Data transmitted over <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a> makes up the majority of data consumed by mobile devices. HTTP is the standard protocol of the web and has also become the de-facto standard for many APIs and other services used by mobile applications. Thus there is potential for a standardised system for caching HTTP data to have a significant impact on energy usage and data transmission rates. However, at present, caching is performed by few apps and inadequately by most mobile web browsers. There is little incentive from users on app developers to add caching, and many perceived disbenefits to those developers, including little improvement to performance, increased code complexity and the potential to display outdated information <a class="citation" href="pages/nac/caching.html#cite-1">(1)</a>.
+        </p>
+
+        <p>
+            To solve this problem, new caching technologies and algorithms have been developed, that can automatically cache HTTP requests when required, with no changes required to apps. This type of caching works on the level of entire responses and could potentially reduce energy consumption by 20% over the same system without caching <a class="citation" href="pages/nac/caching.html#cite-2">(2)</a>.
+        </p>
+
+        <p>
+            Alternatively, if app integration is desired, caching can occur at the level of objects in the response stream, e.g. JSON components. This could potentially lead to improvements by up to 45% in energy consumption, although it requires integration into both the applications as well as remote servers. For some heavily used apps, though, this integration could prove worthwhile <a class="citation" href="pages/nac/caching.html#cite-2">(2)</a>.
+        </p>
+
+        <h2>Delta Encoding</h2>
+
+        <p>
+            Similarly to how caching reduces the impact of reloading unchanged data, delta encoding (also known as redundancy elimination) reduces the impact of reloading slightly changed data. Instead of transmitting a whole document over the network, when only some part of it has been updated, only the updated components will be sent. Then the application on the mobile device can reconstruct the full document using their previous version as well as the new changes made to it.
+        </p>
+
+        <p>
+            This technique is particularly useful for synchronisation of large files between different devices, and many file-synchronisation applications already use delta encoding to reduce transmission volume. Although in theory delta encoding is applicable to many uses, the benefit can be small in some cases, and the development cost is high. Improving developer tooling could help to increase use of these techniques <a class="citation" href="pages/nac/caching.html#cite-3">(3)</a>.
+        </p>
+
+        <footer>
+            <hr>
+            <h4>References</h4>
+
+            <cite id="cite-1">(1) Qian F, Huang J, Erman J, Mao ZM, Sen S, Spatscheck O. How to Reduce Smartphone Traffic Volume by 30%? <i>Passive and Active Measurement.</i> [Online] Springer Berlin Heidelberg; 2013. p. 42–52. Available from: <a href="https://doi.org/doi:10.1007/978-3-642-36516-4_5">doi:10.1007/978-3-642-36516-4_5</a></cite>
+
+            <cite id="cite-2">(2) Dutta K, Vandermeer D. Caching to Reduce Mobile App Energy Consumption. <i>ACM Transactions on the Web.</i> [Online] Association for Computing Machinery (ACM); 2017;12(1): 1–30. Available from: <a href="https://doi.org/doi:10.1145/3125778">doi:10.1145/3125778</a></cite>
+
+            <cite id="cite-3">(3) Cui Y, Lai Z, Wang X, Dai N. QuickSync: Improving Synchronization Efficiency for Mobile Cloud Storage Services. <i>IEEE Transactions on Mobile Computing.</i> [Online] Institute of Electrical and Electronics Engineers (IEEE); 2017;16(12): 3513–3526. Available from: <a href="https://doi.org/doi:10.1109/tmc.2017.2693370">doi:10.1109/tmc.2017.2693370</a></cite>
+
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

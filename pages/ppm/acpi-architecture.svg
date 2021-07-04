@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="398.09812500000004"
+   height="248.44387500000002"
+   version="1.1"
+   id="svg3915"
+   sodipodi:docname="acpi-architecture.svg"
+   inkscape:version="0.91 r13725">
+  <defs
+     id="defs3919" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1839"
+     inkscape:window-height="1056"
+     id="namedview3917"
+     showgrid="false"
+     inkscape:zoom="1.5255326"
+     inkscape:cx="85.032856"
+     inkscape:cy="91.690838"
+     inkscape:window-x="81"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3915" />
+  <!-- Verdana is either a registered trademark or a trademark of Microsoft Corporation in the United States and/or other countries. -->
+  <!-- Copyright: Copyright 2010 Adobe System Incorporated. All rights reserved. -->
+  <metadata
+     id="metadata3810">image/svg+xml0-tmplt2010-02-08T18:09:57-08:002010-02-08T18:09:57-08:002010-02-08T18:09:57-08:00Adobe Illustrator CS4256160JPEG/9j/4AAQSkZJRgABAgEASABIAAD/7QAsUGhvdG9zaG9wIDMuMAA4QklNA+0AAAAAABAASAAAAAEA
+AQBIAAAAAQAB/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoK
+DBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8f
+Hx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgAoAEAAwER
+AAIRAQMRAf/EAaIAAAAHAQEBAQEAAAAAAAAAAAQFAwIGAQAHCAkKCwEAAgIDAQEBAQEAAAAAAAAA
+AQACAwQFBgcICQoLEAACAQMDAgQCBgcDBAIGAnMBAgMRBAAFIRIxQVEGE2EicYEUMpGhBxWxQiPB
+UtHhMxZi8CRygvElQzRTkqKyY3PCNUQnk6OzNhdUZHTD0uIIJoMJChgZhJRFRqS0VtNVKBry4/PE
+1OT0ZXWFlaW1xdXl9WZ2hpamtsbW5vY3R1dnd4eXp7fH1+f3OEhYaHiImKi4yNjo+Ck5SVlpeYmZ
+qbnJ2en5KjpKWmp6ipqqusra6voRAAICAQIDBQUEBQYECAMDbQEAAhEDBCESMUEFURNhIgZxgZEy
+obHwFMHR4SNCFVJicvEzJDRDghaSUyWiY7LCB3PSNeJEgxdUkwgJChgZJjZFGidkdFU38qOzwygp
+0+PzhJSktMTU5PRldYWVpbXF1eX1RlZmdoaWprbG1ub2R1dnd4eXp7fH1+f3OEhYaHiImKi4yNjo
++DlJWWl5iZmpucnZ6fkqOkpaanqKmqq6ytrq+v/aAAwDAQACEQMRAD8A9U4q7FXYq7FXYq7FWN+a
+NN07UdZ8v22oWsN5bme4Yw3EaypUWz0PFwRtiqWeaLb8tPLa2DX/AJcsnGoXK2yehY27+mCCWmlq
+F4xRgVdtz7HFUh1LzL+VmnT38d15NUQ2M11ardLYWDRz3NlD9YlhhAk9Tn6QLL6iKDSla4qm2jzf
+lXrGuwaNYeX7KWefTI9YSf6jbeiIJWRVQtSvq0kVitNgeuKo9rH8oV1GXTGt/L66lBxE9kUshOnN
+lVecdOa8mkUCo6keOKquq6P+VWkLy1ax0LT148+V1FZwjjyC1/eBduRA+eKqMtn+T8So8sHl6NZI
+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.iid:04801174072068118DBBE7203FFAE3D4xmp.did:04801174072068118DBBE7203FFAE3D4uuid:5D20892493BFDB11914A8590D31508C8proof:pdfxmp.iid:02801174072068118DBBE7203FFAE3D4xmp.did:02801174072068118DBBE7203FFAE3D4uuid:5D20892493BFDB11914A8590D31508C8proof:pdfconvertedfrom application/pdf to &lt;unknown&gt;savedxmp.iid:D27F11740720681191099C3B601C45482008-04-17T14:19:15+05:30Adobe Illustrator CS4/convertedfrom application/pdf to &lt;unknown&gt;convertedfrom application/pdf to &lt;unknown&gt;savedxmp.iid:F97F1174072068118D4ED246B3ADB1C62008-05-15T16:23:06-07:00Adobe Illustrator CS4/savedxmp.iid:FA7F1174072068118D4ED246B3ADB1C62008-05-15T17:10:45-07:00Adobe Illustrator CS4/savedxmp.iid:EF7F117407206811A46CA4519D24356B2008-05-15T22:53:33-07:00Adobe Illustrator CS4/savedxmp.iid:F07F117407206811A46CA4519D24356B2008-05-15T23:07:07-07:00Adobe Illustrator CS4/savedxmp.iid:F77F117407206811BDDDFD38D0CF24DD2008-05-16T10:35:43-07:00Adobe Illustrator CS4/convertedfrom application/pdf to &lt;unknown&gt;savedxmp.iid:F97F117407206811BDDDFD38D0CF24DD2008-05-16T10:40:59-07:00Adobe Illustrator CS4/convertedfrom application/vnd.adobe.illustrator to &lt;unknown&gt;savedxmp.iid:FA7F117407206811BDDDFD38D0CF24DD2008-05-16T11:26:55-07:00Adobe Illustrator CS4/savedxmp.iid:FB7F117407206811BDDDFD38D0CF24DD2008-05-16T11:29:01-07:00Adobe Illustrator CS4/savedxmp.iid:FC7F117407206811BDDDFD38D0CF24DD2008-05-16T11:29:20-07:00Adobe Illustrator CS4/savedxmp.iid:FD7F117407206811BDDDFD38D0CF24DD2008-05-16T11:30:54-07:00Adobe Illustrator CS4/savedxmp.iid:FE7F117407206811BDDDFD38D0CF24DD2008-05-16T11:31:22-07:00Adobe Illustrator CS4/savedxmp.iid:B233668C16206811BDDDFD38D0CF24DD2008-05-16T12:23:46-07:00Adobe Illustrator CS4/savedxmp.iid:B333668C16206811BDDDFD38D0CF24DD2008-05-16T13:27:54-07:00Adobe Illustrator CS4/savedxmp.iid:B433668C16206811BDDDFD38D0CF24DD2008-05-16T13:46:13-07:00Adobe Illustrator CS4/savedxmp.iid:F77F11740720681197C1BF14D1759E832008-05-16T15:47:57-07:00Adobe Illustrator CS4/savedxmp.iid:F87F11740720681197C1BF14D1759E832008-05-16T15:51:06-07:00Adobe Illustrator CS4/savedxmp.iid:F97F11740720681197C1BF14D1759E832008-05-16T15:52:22-07:00Adobe Illustrator CS4/convertedfrom application/vnd.adobe.illustrator to application/vnd.adobe.illustratorsavedxmp.iid:FA7F117407206811B628E3BF27C8C41B2008-05-22T13:28:01-07:00Adobe Illustrator CS4/convertedfrom application/vnd.adobe.illustrator to application/vnd.adobe.illustratorsavedxmp.iid:FF7F117407206811B628E3BF27C8C41B2008-05-22T16:23:53-07:00Adobe Illustrator CS4/convertedfrom application/vnd.adobe.illustrator to application/vnd.adobe.illustratorsavedxmp.iid:07C3BD25102DDD1181B594070CEB88D92008-05-28T16:45:26-07:00Adobe Illustrator CS4/convertedfrom application/vnd.adobe.illustrator to application/vnd.adobe.illustratorsavedxmp.iid:F87F1174072068119098B097FDA39BEF2008-06-02T13:25:25-07:00Adobe Illustrator CS4/savedxmp.iid:F77F117407206811BB1DBF8F242B6F842008-06-09T14:58:36-07:00Adobe Illustrator CS4/savedxmp.iid:F97F117407206811ACAFB8DA80854E762008-06-11T14:31:27-07:00Adobe Illustrator CS4/savedxmp.iid:0180117407206811834383CD3A8D23032008-06-11T22:37:35-07:00Adobe Illustrator CS4/savedxmp.iid:F77F117407206811818C85DF6A1A75C32008-06-27T14:40:42-07:00Adobe Illustrator CS4/savedxmp.iid:F97F117407206811A613DC4BA6FE86782010-02-03T16:19:07-08:00Adobe Illustrator CS4/savedxmp.iid:FC7F117407206811A613DC4BA6FE86782010-02-04T10:29:40-08:00Adobe Illustrator CS4/savedxmp.iid:FD7F117407206811A613DC4BA6FE86782010-02-04T10:33:41-08:00Adobe Illustrator CS4/savedxmp.iid:F87F1174072068118F62CC9E6F94AC6D2010-02-05T11:39:29-08:00Adobe Illustrator CS4/savedxmp.iid:02801174072068118DBBE7203FFAE3D42010-02-08T18:04:35-08:00Adobe Illustrator CS4/savedxmp.iid:04801174072068118DBBE7203FFAE3D42010-02-08T18:09:57-08:00Adobe Illustrator CS4/EmbedByReference/Users/bdleininger/Documents/BLL/`Contract Work/WikiCommons/APM-Layers.gifPrintFalseFalse1398.097656248.444336PointsVerdanaVerdanaRegularOpen TypeVersion 5.01xFalseVerdana.ttfCyanMagentaYellowBlackDefault Swatch Group0WhiteRGBPROCESS255255255BlackRGBPROCESS353132CMYK RedRGBPROCESS2362836CMYK YellowRGBPROCESS2552410CMYK GreenRGBPROCESS016581CMYK CyanRGBPROCESS0173238CMYK BlueRGBPROCESS4649145CMYK MagentaRGBPROCESS2350139C=15 M=100 Y=90 K=10RGBPROCESS1903045C=0 M=90 Y=85 K=0RGBPROCESS2386454C=0 M=80 Y=95 K=0RGBPROCESS2409040C=0 M=50 Y=100 K=0RGBPROCESS24614630C=0 M=35 Y=85 K=0RGBPROCESS25017564C=5 M=0 Y=90 K=0RGBPROCESS24923649C=20 M=0 Y=100 K=0RGBPROCESS21422235C=50 M=0 Y=100 K=0RGBPROCESS13919763C=75 M=0 Y=100 K=0RGBPROCESS5517974C=85 M=10 Y=100 K=10RGBPROCESS014769C=90 M=30 Y=95 K=30RGBPROCESS010456C=75 M=0 Y=75 K=0RGBPROCESS41180115C=80 M=10 Y=45 K=0RGBPROCESS0166156C=70 M=15 Y=0 K=0RGBPROCESS38169224C=85 M=50 Y=0 K=0RGBPROCESS27117187C=100 M=95 Y=5 K=0RGBPROCESS4356143C=100 M=100 Y=25 K=25RGBPROCESS383497C=75 M=100 Y=0 K=0RGBPROCESS10145144C=50 M=100 Y=0 K=0RGBPROCESS14439142C=35 M=100 Y=35 K=10RGBPROCESS1583199C=10 M=100 Y=50 K=0RGBPROCESS2172892C=0 M=95 Y=20 K=0RGBPROCESS23641123C=25 M=25 Y=40 K=0RGBPROCESS193180154C=40 M=45 Y=50 K=5RGBPROCESS154132121C=50 M=50 Y=60 K=25RGBPROCESS11310188C=55 M=60 Y=65 K=40RGBPROCESS907466C=25 M=40 Y=65 K=0RGBPROCESS195153107C=30 M=50 Y=75 K=10RGBPROCESS16812479C=35 M=60 Y=80 K=25RGBPROCESS1389359C=40 M=65 Y=90 K=35RGBPROCESS1177640C=40 M=70 Y=100 K=50RGBPROCESS965619C=50 M=70 Y=80 K=70RGBPROCESS593520Grays1C=0 M=0 Y=0 K=100RGBPROCESS353132C=0 M=0 Y=0 K=90RGBPROCESS646465C=0 M=0 Y=0 K=80RGBPROCESS888991C=0 M=0 Y=0 K=70RGBPROCESS109110112C=0 M=0 Y=0 K=60RGBPROCESS128129132C=0 M=0 Y=0 K=50RGBPROCESS146148151C=0 M=0 Y=0 K=40RGBPROCESS166168171C=0 M=0 Y=0 K=30RGBPROCESS187189191C=0 M=0 Y=0 K=20RGBPROCESS208210211C=0 M=0 Y=0 K=10RGBPROCESS230231232C=0 M=0 Y=0 K=5RGBPROCESS241241242Brights1C=0 M=100 Y=100 K=0RGBPROCESS2362836C=0 M=75 Y=100 K=0RGBPROCESS24110134C=0 M=10 Y=95 K=0RGBPROCESS25522121C=85 M=10 Y=100 K=0RGBPROCESS016175C=100 M=90 Y=0 K=0RGBPROCESS3464153C=60 M=90 Y=0 K=0RGBPROCESS12763151Adobe PDF library 9.00<rdf:RDF>
+  <cc:Work
+     rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:title />
+    <cc:license
+       rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+  </cc:Work>
+  <cc:License
+     rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+    <cc:permits
+       rdf:resource="http://creativecommons.org/ns#Reproduction" />
+    <cc:permits
+       rdf:resource="http://creativecommons.org/ns#Distribution" />
+    <cc:permits
+       rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+  </cc:License>
+</rdf:RDF>
+</metadata>
+  <rect
+     height="26.053699"
+     width="164.3"
+     y="8.1943226"
+     x="7.7105966"
+     id="svg_1"
+     style="fill:#aad400;stroke:#231f20" />
+  <rect
+     height="26.053699"
+     width="164.3"
+     y="60.396187"
+     x="8.2698946"
+     id="svg_1-8"
+     style="fill:#b3b3b3;stroke:#231f20;fill-opacity:1" />
+  <rect
+     height="26.053699"
+     width="164.3"
+     y="60.396187"
+     x="221.35056"
+     id="svg_1-4"
+     style="fill:#aad400;stroke:#231f20;fill-opacity:1" />
+  <rect
+     height="26.053699"
+     width="164.3"
+     y="106.24832"
+     x="109.25856"
+     id="svg_1-85"
+     style="fill:#35b380;stroke:#231f20;fill-opacity:1" />
+  <rect
+     height="26.297455"
+     width="93.0933"
+     y="156.28015"
+     x="39.652756"
+     id="svg_1-9"
+     style="fill:#ffaaaa;stroke:#231f20;stroke-width:0.75624514" />
+  <rect
+     height="26.053699"
+     width="164.3"
+     y="211.88567"
+     x="108.5"
+     id="svg_1-93"
+     style="fill:#999999;stroke:#231f20;fill-opacity:1" />
+  <rect
+     height="26.297455"
+     width="93.0933"
+     y="156.28015"
+     x="144.86191"
+     id="svg_1-9-8"
+     style="fill:#ff8080;stroke:#231f20;stroke-width:0.75624514" />
+  <rect
+     height="26.279379"
+     width="97.663788"
+     y="156.28918"
+     x="252.37439"
+     id="svg_1-9-9"
+     style="fill:#ffaaaa;stroke:#231f20;stroke-width:0.77432066" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="67.324188"
+     y="78.890808"
+     id="text4014"><tspan
+       sodipodi:role="line"
+       id="tspan4012"
+       x="67.324188"
+       y="78.890808">Kernel</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="246.09789"
+     y="79.519394"
+     id="text4014-1"><tspan
+       sodipodi:role="line"
+       id="tspan4012-3"
+       x="246.09789"
+       y="79.519394">Power Manager</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="149.85062"
+     y="124.74294"
+     id="text4014-7"><tspan
+       sodipodi:role="line"
+       id="tspan4012-1"
+       x="149.85062"
+       y="124.74294">ACPI Driver</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="52.31171"
+     y="173.90251"
+     id="text4014-0"><tspan
+       sodipodi:role="line"
+       id="tspan4012-45"
+       x="52.31171"
+       y="173.90251"
+       style="font-size:12px">ACPI Tables</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="154.88568"
+     y="230.38029"
+     id="text4014-17"><tspan
+       sodipodi:role="line"
+       id="tspan4012-43"
+       x="154.88568"
+       y="230.38029">Hardware</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="161.56377"
+     y="174.25061"
+     id="text4014-0-3"><tspan
+       sodipodi:role="line"
+       id="tspan4012-45-9"
+       x="161.56377"
+       y="174.25061"
+       style="font-size:12px">ACPI BIOS</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="258.11938"
+     y="174.05045"
+     id="text4014-0-4"><tspan
+       sodipodi:role="line"
+       id="tspan4012-45-6"
+       x="258.11938"
+       y="174.05045"
+       style="font-size:12px">ACPI Registers</tspan></text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1.0184381px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 91.182667,34.09251 c 0,25.836362 0,25.836362 0,25.836362"
+     id="path4094"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+     d="m 4.5,197.28072 c 390.02772,0 390.02772,0 390.02772,0"
+     id="path4096"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+     d="m 4.5,143.56247 c 390.02772,0 390.02772,0 390.02772,0"
+     id="path4096-5"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.89463627px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 147.48948,86.725205 c 0,19.936785 0,19.936785 0,19.936785"
+     id="path4094-9"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.88725203px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 242.21049,86.725205 c 0,19.609035 0,19.609035 0,19.609035"
+     id="path4094-6"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.96537715px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 124.87443,132.61082 c 0,23.21432 0,23.21432 0,23.21432"
+     id="path4094-68"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.97891206px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 193.37509,132.61082 c 0,23.86983 0,23.86983 0,23.86983"
+     id="path4094-5"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.98560983px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 262.53126,132.28307 c 0,24.19759 0,24.19759 0,24.19759"
+     id="path4094-3"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1.08110833px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 193.42655,182.42948 c 0,29.11391 0,29.11391 0,29.11391"
+     id="path4094-1"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1.08110833px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 262.57855,182.42948 c 0,29.11391 0,29.11391 0,29.11391"
+     id="path4094-1-0"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1.08110833px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 124.54055,182.75724 c 0,29.11391 0,29.11391 0,29.11391"
+     id="path4094-1-1"
+     inkscape:connector-curvature="0" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:12px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="363.15186"
+     y="159.62245"
+     id="text6420"><tspan
+       sodipodi:role="line"
+       id="tspan6418"
+       x="363.15186"
+       y="159.62245">ACPI</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:12px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="334.96497"
+     y="214.02966"
+     id="text6424"><tspan
+       sodipodi:role="line"
+       id="tspan6422"
+       x="334.96497"
+       y="214.02966">Hardware</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:12px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="372.9845"
+     y="137.99065"
+     id="text6428"><tspan
+       sodipodi:role="line"
+       id="tspan6426"
+       x="372.9845"
+       y="137.99065">OS</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:14.66666698px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="45.362873"
+     y="25.956379"
+     id="text4014-3"><tspan
+       sodipodi:role="line"
+       id="tspan4012-6"
+       x="45.362873"
+       y="25.956379">Applications</tspan></text>
+</svg>

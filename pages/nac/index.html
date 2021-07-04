@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <base href="../../">
+    <link rel="stylesheet" type="text/css" href="menuStyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Networking &middot; Green Computing</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="sidenav">
+            <li>
+                <a href="index.html#menu" class="title" style="padding: 8px 16px; font-weight: bold">Green Computing</a>
+            </li>
+            <hr style="border-style: solid; color: var(--main)">
+            <li>
+                <a href="index.html#menu">Home</a>
+            </li>
+            <li>
+                <a href="pages/theory/consumption.html">Theory</a>
+            </li>
+            <li>
+                <a href="pages/dev/index.html">Software Development</a>
+            </li>
+            <li>
+                <a href="pages/ppm/acpi.html">Power Management</a>
+            </li>
+            <li>
+                <a class="active">Networking</a>
+                <ul style="list-style-type: none;">
+                    <li>
+                        <a class="active" href="pages/nac/index.html">Introduction</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/reducing.html">Demand Reduction</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/caching.html">Caching</a>
+                    </li>
+                    <li>
+                        <a href="pages/nac/improving.html">Improving Network Protocols</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="pages/development-tips.html">Practical Tips</a>
+            </li>
+            <li>
+                <a href="about.html">About</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="menuButton" style="left: 250px" onclick="toggleMenu()">
+        <i></i>
+    </div>
+
+    <article>
+
+        <header>
+            <h1 style="margin-bottom: 0px">Networking</h1>
+            <span style="font-size: 1.3em; color: grey">An introduction to the importance of networking and caching in reducing mobile power consumption.</span>
+        </header>
+
+        <p>
+            Networking and connectivity are some of the most important features of mobile devices. They allow phones and tablets to be more than just a dumb calculator or games console, unlocking connectivity to the World Wide Web as well as a vast array of connected, smart, apps and services.
+        </p>
+
+        <p>
+            However, in addition to the obvious utility of networking, wireless hardware in mobile devices is a significant user of energy, even when compared to other high usage peripherals such as the display or main processor <a class="citation" href="pages/nac/index.html#cite-3">(3)</a>. Thus, reducing the energy used by networking components must be an important focus of any strategy to reduce the energy requirements of mobile computing.
+        </p>
+
+        <p>
+            In a typical mobile phone, networking hardware takes up around 40% the energy budget when in use, and may consume more than 70% of the energy used when in standby mode. Historically, as network technology and speed have improved, the power used by the associated hardware has simultaneously increased. Thus with the approaching advent of 5G networking technology and the expected increase in power consumption, this will become an even more important area in the quest to reduce mobile energy consumption <a class="citation" href="pages/nac/index.html#cite-4">(4)</a>.
+        </p>
+
+        <p>
+            So far, most work on improving the energy consumption of networking hardware has been focused on either the hardware itself or the cellular technology (e.g. 4G). Better manufacturing processes and energy-aware design of the chips themselves has led to a power improvement over the past several decades, allowing faster speeds and better battery life in new devices <a class="citation" href="pages/nac/index.html#cite-1">(1)</a> <a class="citation" href="pages/nac/index.html#cite-2">(2)</a>.
+        </p>
+
+        <p>
+            However, these improvements are not a comprehensive and final solution to the problem, particularly as network hardware cannot be upgraded during the lifecycle of mobile devices.  Instead, these improvements are only seen by users when they buy a new device &mdash; since consumers are putting off buying new for longer and longer, a better solution must be found.
+        </p>
+
+        <figure>
+            <img src="pages/nac/handset-replacement-cycle.png">
+            <figcaption>Fig 1: Average time mobile handset replacement cycle in the US over time. <a class="citation" href="pages/nac/index.html#cite-1">(1)</a></figcaption>
+        </figure>
+
+        <p>
+            Luckily, there are improvements to energy consumption that can be made outside of hardware. In recent years, improvements have been developed at many layers of the network stack, from the lowest levels of the operating system to the upper echelons of app development, all of which could significantly improve energy consumption even for older devices. There are three major optimisation methods we will consider: demand reduction, caching and network protocol improvements. All three of these are major current research areas and have strong potential for energy savings now and in the future.
+        </p>
+
+        <h2>Demand Reduction</h2>
+
+        <p>
+            One of the most obvious and effective ways to reduce one's environmental impact is to reduce the volume of stuff that one buys and uses. A similar principle applies to mobile energy consumption &mdash; as the amount of network data used reduces, generally so does the energy used by the associated hardware. Thus, reducing the use of mobile network data is important to reduce overall energy consumption. This method also has other benefits for users, since mobile data consumption tends to be heavily capped and very expensive as compared to fixed-line data available via WiFi &mdash; mobile data is often more than 40x the cost. Thus the benefits for users will be twofold, both improving battery life as well as reducing costs for network data. Precaching, local computation where possible and blocking of advertisements are all important areas where demand reduction can be achieved.
+        </p>
+
+        <p>
+            <a href="pages/nac/reducing.html">Read the full article about demand reduction!</a>
+        </p>
+
+        <h2>Caching</h2>
+
+        <p>
+            Caching is the principle by which data, once downloaded, is saved on the device in case it is needed later. If data previously downloaded and stored in a cache is required again, it can simply be loaded from that cache, instead of waiting on the network to deliver the file. In addition to improving the speed and responsiveness of mobile apps and browsing, this reduces the volume of network traffic, and in some cases obviates the need for the network hardware to turn on at all. Existing apps do not make heavy use of caching, mostly due to a lack of developer knowledge and incentive, as well as sometimes marginal performance benefits. Both app and operating system level solutions that overcome these barriers have the potential to save significant quantities of energy on mobile devices.
+        </p>
+
+        <p>
+            <a href="pages/nac/caching.html">Read the full article about caching!</a>
+        </p>
+
+        <h2>Network Protocol Improvements</h2>
+
+        <p>
+            In addition to energy directly used to handle network requests and transmit data, there are significant overheads inherent to the current network protocols and the software stack with which they interface. Mobile network connections have various power states, and before a device may send or receive any data over it, the connection must be promoted to a higher power state. These waiting states consume large amounts of power compared to the idle state, and there is comparatively little difference in energy usage between these states and when actively transmitting or receiving. Better decisions on when to promote or demote the connection's power state can, therefore, have a significant effect on energy usage, as waiting in a high power state for a transmission that never occurs can be avoided. Similarly, reordering requests to reduce time in high power states, as well as network protocols like QUIC with a lower latency overhead can also reduce energy wasted through this mechanism.
+        </p>
+
+        <p>
+            <a href="pages/nac/improving.html">Read the full article about improving network protocols!</a>
+        </p>
+
+        <footer>
+            <hr>
+            <h4>References</h4>
+
+            <cite id="cite-1">(1) Recon Analytics. <i>2014 US Mobile Phone sales fall by 15% and handset replacement cycle lengthens to historic high</i> &mdash; USA &mdash; February 2015. Available from: <a href="http://reconanalytics.com/2015/02/2014-us-mobile-phone-sales-fall-by-15-and-handset-replacement-cycle-lengthens-to-historic-high/">http://reconanalytics.com/2015/02/2014-us-mobile-phone-sales-fall-by-15-and-handset-replacement-cycle-lengthens-to-historic-high/</a> [Accessed: 5th March 2018]</cite>
+
+            <cite id="cite-2">(2) Asymco. <i>Determining the Average Apple Device Lifespan</i> &mdash; USA &mdash; March 2018. Available from: <a href="http://www.asymco.com/2018/03/01/determining-the-average-apple-device-lifespan/">http://www.asymco.com/2018/03/01/determining-the-average-apple-device-lifespan/</a> [Accessed: 5th March 2018]</cite>
+
+            <cite id="cite-3">(3) Pentikousis K. <i>In search of energy-efficient mobile networking.</i> IEEE Communications Magazine. [Online] Institute of Electrical and Electronics Engineers (IEEE); 2010;48(1): 95–103. Available from: <a href="https://doi.org/doi:10.1109/mcom.2010.5394036">doi:10.1109/mcom.2010.5394036</a></cite>
+
+            <cite id="cite-4">(4) Dutta K, Vandermeer D. <i>Caching to Reduce Mobile App Energy Consumption.</i> ACM Transactions on the Web. [Online] Association for Computing Machinery (ACM); 2017;12(1): 1–30. Available from: <a href="https://doi.org/doi:10.1145/3125778">doi:10.1145/3125778</a></cite>
+        </footer>
+    </article>
+
+    <script src="slideMenu.js"></script>
+</body>
+
+</html>

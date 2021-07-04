@@ -1,0 +1,229 @@
+﻿article {
+  margin: 0 auto;
+  width: 50%;
+  font-size: 18px;
+}
+
+article > header > h1 {
+  margin-bottom: 0;
+}
+
+article > header > span {
+  font-size: 1.3em;
+  color: var(--light-main);
+}
+
+article > p {
+  text-align: justify;
+}
+
+article > figure {
+  background-color: var(--light);
+  padding: 1em;
+  box-shadow: 5px 5px 10px var(--dimmed);
+  margin: 0 auto;
+  width: 60%;
+  margin: 0.55em auto 0.75em;
+}
+
+article > figure > img {
+  width: 100%;
+}
+
+article > figure > figcaption {
+  margin-top: 1em;
+  font-size: 0.9em;
+  text-align: center;
+  color: var(--main);
+}
+
+footer > hr {
+  height: 1.5px;
+  background: var(--dark);
+}
+
+@media screen and (max-width: 800px) {
+    article {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+  article {
+    width: 90%;
+  }
+
+  article > figure {
+      width: calc(100% - 2em);
+  }
+}
+
+blockquote {
+  text-align: justify;
+  border-left: 12px solid var(--main);
+  background: #ACEEE6;
+
+  margin-left: 40px;
+  margin-right: 5px;
+  padding: 1px 10px 11px 15px;
+  box-shadow: 5px 5px 10px var(--dimmed)
+}
+
+blockquote p {
+  -webkit-margin-before: 0.75em;
+  -webkit-margin-after: 0.5em;
+  color: var(--dark);
+}
+
+blockquote footer {
+  color: var(--light-main);
+  font-family: Georgia, serif;
+  font-size: 0.75em;
+  text-align: right;
+  margin: 0px;
+  padding-top: 0%;
+}
+
+h2.pinline {
+  text-align: center;
+  display: block;
+  overflow: hidden;
+  font-size: 0.9em;
+  font-family: "Open Sans";
+  font-weight: 900;
+  text-transform: uppercase;
+}
+p.pinline {
+  font-family: "Open Sans";
+}
+h2.pinline span {
+  font-family: "Open Sans";
+  position: relative;
+  display: inline-block;
+  line-height: 2;
+}
+h2.pinline span:before,
+h2.pinline span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  background: var(--dark);
+  width: 99999px;
+}
+h2.pinline span:before {
+  left: 100%;
+  margin-left: 20px;
+}
+h2.pinline span:after {
+  right: 100%;
+  margin-right: 20px;
+}
+p.note {
+  margin-left: 4%;
+  margin-right: 4%;
+  color: var(--dark);
+  font-weight: lighter;
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 1em;
+}
+
+:root {
+  --main: rgb(58, 90, 58);
+  --dark: rgb(63, 75, 59);
+  --light: rgb(74, 219, 200);
+  --light-main: rgb(90, 147, 103);
+  --link: rgb(104, 104, 190);
+  --dimmed: rgb(68, 200, 182);
+  --white: rgb(222, 248, 245);
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--white);
+  color: var(--dark);
+}
+p {
+  color: var(--dark);
+}
+h1 {
+  -webkit-margin-after: -0.2em;
+  -webkit-margin-before: 1.2em;
+  color: var(--main);
+  font-size: xx-large;
+  padding-bottom: 0.2em;
+  font-weight: 900;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+h2 {
+  color: var(--main);
+  -webkit-margin-after: -0.2em;
+  -webkit-margin-before: 1.2em;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+h3 {
+  -webkit-margin-after: -0.2em;
+  -webkit-margin-before: 1.2em;
+  color: var(--light-main);
+  padding-bottom: 0.2em;
+
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+a.citation {
+    color: var(--link);
+    text-decoration: none;
+}
+
+cite {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-style: normal;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+
+blockquote cite {
+    display: initial;
+    margin: unset;
+    font-style: italic;
+    white-space: unset;
+    word-wrap: unset;
+}
+.makeWideOnMobile{
+  width: 70%;
+}
+.taleftOnM{
+  text-align: right;
+}
+.padLeft{
+  padding-left: 15%;
+}
+.padRight{
+  padding-right: 15%;
+}
+@media screen and (max-width: 600px) {
+  .hideOnMobile {
+    width: 0px;
+    display: none;
+  }
+  .makeWideOnMobile{
+    width: 100%;
+  }
+  blockquote.makeWideOnMobile{
+    width: calc(100% - 2em);
+  }
+  .taleftOnM{
+    text-align: left;
+  }
+  .padLeft{
+    padding: unset;
+  }
+  .padRight{
+    padding: unset;
+  }
+}

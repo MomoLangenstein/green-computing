@@ -1,0 +1,18 @@
+article > figure {
+    width: calc(50% - 2.5em);
+}
+
+@media screen and (max-width: 1728px) {
+    article > figure {
+        width: calc(100% - 2em);
+        float: none;
+    }
+}
+
+article > figure:nth-of-type(1) {
+    float: left;
+}
+
+article > figure:nth-of-type(2) {
+    float: right;
+}
